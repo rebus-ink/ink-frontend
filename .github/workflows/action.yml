@@ -39,7 +39,7 @@ jobs:
       env:
         APP_ENGINE_YAML: ${{ secrets.APP_ENGINE_YAML }}
     - id: deploy
-      uses: GoogleCloudPlatform/github-actions/deploy-appengine@master
+      uses: GoogleCloudPlatform/github-actions/deploy-appengine@dev
   # Finally, we need to make sure that the credentials have permission to deploy to that particular project and that the App Engine Admin API is enabled for that project.
   # This is trickier than you'd think as Google's UI (for everything, everywhere, but especially Google Cloud) is confusing garbage.
       with:
