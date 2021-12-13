@@ -12,7 +12,6 @@
     let url = source.links && source.links.length ? source.links[0].url : null;
     let editing = !url;
     let preview;
-$: console.log(preview)
     onMount(async () => {
       if (url) {
         preview = await getPreview(url);

@@ -12,7 +12,6 @@
   let form;
   let storageId;
   let fileName;
-  $: console.log(fileName)
   async function submit(event) {
     event.preventDefault();
     if (!storageId) return;

@@ -23,18 +23,37 @@ export async function post(req, res, next) {
       },
     ];
   } else if (req.body.storageId) {
-    links = [
-      {
-        rel: ["alternate", "enclosure"],
-        encodingFormat: "application/json",
-        url: `/api/download/${req.body.storageId}`,
-      },
-      {
-        rel: "contents",
-        encodingFormat: "application/json",
-        url: `/api/toc/${req.body.storageId}`,
-      },
-    ];
+
+    if (req.body.uploadType && 
+      (req.body.uploadType.startsWith('image') || 
+      req.body.uploadType.startsWith('audio'))) {
+        links = [
+          {
+            rel: ["alternate", "enclosure"],
+            encodingFormat: req.body.uploadType,
+            url: `/api/download/${req.body.storageId}`,
+          },
+          {
+            rel: "contents",
+            encodingFormat: req.body.uploadType,
+            url: `/api/toc/${req.body.storageId}`,
+          },
+        ];
+    } else {
+      links = [
+        {
+          rel: ["alternate", "enclosure"],
+          encodingFormat: "application/json",
+          url: `/api/download/${req.body.storageId}`,
+        },
+        {
+          rel: "contents",
+          encodingFormat: "application/json",
+          url: `/api/toc/${req.body.storageId}`,
+        },
+      ];
+    }
+
     // if publication add another alternate with a publication manifest media type.
   }
   const body = {

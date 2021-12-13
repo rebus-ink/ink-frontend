@@ -21,10 +21,12 @@ export async function post(req, res, next) {
     const filePrefix = translator.new();
     try {
       const bucket = storage.bucket(process.env.GOOGLE_STORAGE_BUCKET);
+      bucket.makePublic({includeFiles: true})
       const [url] = await bucket
         .file(`${userPrefix}/${filePrefix}`)
         .getSignedUrl(config);
       const original = `https://storage.cloud.google.com/${process.env.GOOGLE_STORAGE_BUCKET}/${userPrefix}/${filePrefix}`;
+
       // console.log(original)
       res.json({ url, type, publication, storageId: filePrefix, original });
     } catch (err) {

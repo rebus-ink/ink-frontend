@@ -6,7 +6,13 @@ import { fetch } from "./fetch.js";
 export const refreshPublication = writable({ id: null, time: Date.now() });
 
 const publicationId = derived(page, ($page, set) => {
-  set($page.params.publicationId || null);
+  if ($page.params.id) {
+      set($page.params.id)
+    } else {
+      set($page.params.publicationId || null);
+
+    }
+
 });
 
 const publicationWorkspace = derived(page, $page => $page.params.workspace);

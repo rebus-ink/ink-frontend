@@ -35,14 +35,16 @@
     grid-template-columns: 300px auto;
     grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
     min-height: 100vh;
+    padding-top: 50px;
   }
-  /* .TitleBar {
+  .TitleBar {
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-  } */
+    z-index: 999;
+  }
   .left-menu {
     background: lightgrey;
   }
@@ -62,6 +64,7 @@
 </div>
 <!-- 
 <svelte:component this={Info} /> -->
+
 
 <div class="NoSource">
   <div class="left-menu">

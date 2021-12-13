@@ -30,6 +30,8 @@
     const { page } = stores();
     export let note = { body: [], source: { name: "" } };
     export let source;
+    export let pages = true;
+    $: console.log(pages)
     let selectedFlags = [];
     let selectedNotebooks = [];
     let pageNumber;
@@ -610,12 +612,12 @@
           </label>
 
         </div>
-
+      {#if pages}
         <div>
           Pages: <input class="page-input" type="text" bind:value={pageNumber} />
 
         </div>
-
+      {/if}
         
       </div>
         <br/>

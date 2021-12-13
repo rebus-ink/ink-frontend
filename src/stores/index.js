@@ -1,7 +1,10 @@
 
 import { writable } from 'svelte/store';
 export { page, params } from './page'
-export { publication, contents, refreshPublication, addingStacks, availableStacks, workingStacks, removingStacks, publicationNotes, notesSearch, chapter, chapterId, storedPub, placedNotes, chapterNotes } from './publication'
+export { publication, contents, refreshPublication, addingStacks, 
+  availableStacks, workingStacks, removingStacks, 
+  publicationNotes, notesSearch, chapter, chapterId, storedPub, 
+  placedNotes, chapterNotes } from './publication'
 export { error } from './error'
 export { nodes, intersecting, positions, annotations } from './utilities/nodes'
 
@@ -9,7 +12,8 @@ export { library, refreshDate, searchStore } from './library'
 export { insource, refreshInSource } from './insource'
 export { innote, refreshInNote } from './innote'
 export { inntbk, refreshInNtbk } from './inntbk'
-export { notes, refreshNotes, searchNotes, sourceNotes, refreshSourceNotes } from './notes'
+export { notes, refreshNotes, searchNotes, sourceNotes, 
+  refreshSourceNotes } from './notes'
 export { notebooks, refreshNotebooks, searchNotebooks, addedNotebooks, defaultNotebook } from './notebooks'
 export { collections, workspaces, tags, refreshCollections, addingWorkspace, addedCollections, addedWorkspaces } from './collections'
 export { note, refreshNote } from './note'

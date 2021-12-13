@@ -13,10 +13,24 @@
   let storageId;
   let original;
   let fileName;
+
+  let supportedTypes = ["application/epub+zip", "application/pdf", "image/jpeg", 
+    "image/png", "image/gif", "audio/mpeg"];
+
+  let error = false;
+
   async function change(event) {
     file = event.target.files[0];
     fileName = file.name;
-    const response = await fetch("/api/upload-url", {
+
+    if (supportedTypes.indexOf(file.type) === -1) {
+      error = true;
+    } else {
+      error = false;
+    }
+
+    if (!error) {
+      const response = await fetch("/api/upload-url", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -50,6 +64,8 @@
       done = false;
       failed = true;
     }
+    }
+
   }
 </script>
 
@@ -138,6 +154,13 @@
     animation-iteration-count: infinite;
     opacity: 0.5;
   }
+  .error {
+    border-color: red;
+  }
+  .error-message {
+    color: red;
+    font-size: 0.8rem;
+  }
   @keyframes loading {
     from {
       transform: scale(0.75);
@@ -179,7 +202,7 @@ Upload URL endpoint should take content type as a parameter and return a {public
   {#if original}
     <input type="hidden" name="uploadURL" value={original} />
   {/if}
-  <label class="input" class:done class:failed class:working>
+  <label class="input" class:done class:failed class:working class:error>
     {#if file}{file.name}{:else}Upload a file{/if}
     <input
       type="file"
@@ -190,4 +213,7 @@ Upload URL endpoint should take content type as a parameter and return a {public
       class="visually-hidden"
       on:change={change} />
   </label>
+  {#if error}
+  <span class="error-message">file format not supported</span>
+  {/if}
 </div>

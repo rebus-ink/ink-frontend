@@ -102,7 +102,6 @@
       abstract: form.abstract,
       keywords: form.keywords? form.keywords.split(',') : null
     }
-
     return source
   }
 
@@ -155,8 +154,7 @@
         $addedCollections = [];
     const sourceData = formToSource(formData)
     sourceData.addedCollections = body.addedCollections;
-
-       await fetch(`/api/create-publication`, {
+      await fetch(`/api/create-publication`, {
           method: "POST",
           credentials: "include",
           headers: {
@@ -176,7 +174,6 @@
     event.preventDefault();
     if (!atNotebook) close();
     else ntbkClose();
-
     const { target } = event;
     const newInput = window.document.getElementById("new-input").value;
     //if (newInput[0] === "#") {
@@ -210,7 +207,6 @@
         body.addedWorkspaces = $addedWorkspaces;
         $addedWorkspaces = [];
         $addedCollections = [];
-
         let url = atNotebook
           ? `/api/notebooks/${$page.params.id}/sources/`
           : `/api/create-publication`;

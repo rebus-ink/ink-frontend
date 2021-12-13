@@ -41,7 +41,7 @@ export async function get(req, res, next) {
           if (!exists) {
             // console.log("publication does not exist");
             response._processing = true;
-          } else {
+          } else { 
             // console.log("publication exists")
             const [data] = await file.download();
             const stored = JSON.parse(data);
@@ -52,8 +52,18 @@ export async function get(req, res, next) {
               response._processing = stored._processing;
             }
             if (stored._unsupported) {
-              // console.log("publication unsupported")
-              response._unsupported = stored._unsupported;
+              console.log('unsupported: ', response)
+
+              if (response.links && response.links[0] && 
+                response.links[0].encodingFormat && 
+                (response.links[0].encodingFormat.startsWith('image') || 
+                response.links[0].encodingFormat.startsWith('audio'))) {
+                  response._multimedia = true;
+              } else {
+                // console.log("publication unsupported")
+                response._unsupported = stored._unsupported;
+              }
+
             }
             if (stored._error) {
               // console.log("publication error")
@@ -68,6 +78,7 @@ export async function get(req, res, next) {
     }
     // Get stored publication, add readingorder and resources from there
     // Add last-modified header
+
     res.append("Last-Modified", new Date(response.updated).toUTCString());
     res.json(response);
   } catch (err) {

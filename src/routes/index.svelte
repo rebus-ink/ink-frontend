@@ -22,7 +22,6 @@
   $: if ($insource) items = $insource.items;
   $: if ($inntbk) itemsNtbk = $inntbk.items;
 
-  $: console.log($searchResults)
   let date = new Date(),
     weekday = [
       "Sunday",
