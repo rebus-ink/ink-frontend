@@ -3,7 +3,10 @@ import jwt from "jsonwebtoken";
 import got from "got";
 import httpStrategies from "passport-http";
 import debugSetup from "debug";
+import path from "path";
 import Auth0Strategy from "passport-auth0";
+const { Storage } = require("@google-cloud/storage");
+const storage = new Storage();
 const debug = debugSetup("vonnegut:auth");
 // const LocalStrategy = require('passport-local').Strategy
 // const {Firestore} = require('@google-cloud/firestore');
@@ -72,6 +75,116 @@ async function deserialise(user) {
             })
           });
           user.profile = await getProfile(user);
+
+          // create source with source file
+
+          const responseSource = await got.post(`${process.env.API_SERVER}sources`, {
+            headers: {
+              "content-type": "application/ld+json",
+              Authorization: `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+              name: "this is a sample source with a content file",
+              type: "Book",
+              json: {}
+            })
+          });
+
+          const resSource = JSON.parse(responseSource.body)
+          const sourceId = resSource.shortId
+          const uploadUrl = `readers/${sourceId.replace("-", "/")}/sample-source.epub`
+          const uploadBucket = storage.bucket(process.env.GOOGLE_STORAGE_BUCKET);
+
+          async function uploadFile() {
+
+            await uploadBucket.upload('src/sample-source.epub', {
+              destination: uploadUrl,
+            });
+          }
+          
+          uploadFile().catch(console.error).then(async() => {
+            let storageId = sourceId.substring(sourceId.indexOf('-')+1)
+            let source = Object.assign({}, resSource, {
+              json: {storageId},
+              links: [
+                {
+                  rel: ["alternate", "enclosure"],
+                  encodingFormat: "application/json",
+                  url: `/api/download/${storageId}`,
+                },
+                {
+                  rel: "contents",
+                  encodingFormat: "application/json",
+                  url: `/api/toc/${storageId}`,
+                }
+              ]
+            })
+            await got.patch(`${process.env.API_SERVER}sources/${sourceId}`, {
+              headers: {
+                "content-type": "application/ld+json",
+                Authorization: `Bearer ${user.token}`
+              },
+              body: JSON.stringify(source)
+            });
+
+          })
+
+
+
+          // CREATE EMPTY SOURCE
+          await got.post(`${process.env.API_SERVER}sources`, {
+            headers: {
+              "content-type": "application/ld+json",
+              Authorization: `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+              name: "Sample source withtout content",
+              type: "Book",
+              json: {}
+            })
+          });
+
+
+
+          // CREATE NOTE
+
+          // need to give it a colour
+          const tags = await got.get(`${process.env.API_SERVER}tags`, {
+            headers: {
+              "content-type": "application/ld+json",
+              Authorization: `Bearer ${user.token}`
+            }
+          });
+
+          const tagsList = JSON.parse(tags.body)
+          let colour1Tag = tagsList.filter(x => x.name === "colour1")
+
+          await got.post(`${process.env.API_SERVER}notes`, {
+            headers: {
+              "content-type": "application/ld+json",
+              Authorization: `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+              body: {
+                motivation: "commenting",
+                content: "This is a note. Click to edit or delete it."
+              },
+              tags: [colour1Tag[0]]
+            })
+          });
+    
+          // CREATE NOTEBOOK
+          await got.post(`${process.env.API_SERVER}notebooks`, {
+            headers: {
+              "content-type": "application/ld+json",
+              Authorization: `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+              name: "Sample Notebook"
+            })
+          });
+
+
         } catch (err) {
           console.error(err);
         }
