@@ -1,18 +1,25 @@
 # Overview
 
-Using sapper and expressjs this server provides:
+A [Svelte](https://svelte.dev/) Single-Page App with Server-Side Rendering (SSR).
+## Feature Summary
 
-- A [svelte-based](https://svelte.dev/) Single-Page App with:
-  - A dashboard at `/`
-  - A sources library under `/library/*/*`
-  - A notes library under `/notes/*/*` with a:
-    - Individual notes view under `/notes/*/*/:id`
-  - A profile `/profile/`
-  - A reading UI under `/sources/:storageId/:sourceId/:path+`
-  - API endpoints under `/api/**` (see below)
-- Server-side rendering for the SPA
-- Session management via `express-session`
-- Authentication via `passportjs` and `Auth0` (although other `passportjs` adapters can be used)
+|    Feature     |                  URL                   |
+| -------------- | -------------------------------------- |
+| Dashboard      | `/`                                    |
+| Source Library | `/library/*/*`                         |
+| Note Library   | `/notes/*/*`, `/notes/*/*/:id`         |
+| Reader UI      | `/sources/:storageId/:sourceId/:path+` |
+| Reader Profile |                                        |
+
+## Key Components
+
+|     Component      |                                         Description                                          |
+| ------------------ | -------------------------------------------------------------------------------------------- |
+| Authentication     | Implemented with `passportjs` and `Auth0` (although other `passportjs` adapters can be used) |
+| Session management | Implemented with `express-session`.                                                          |
+
+## API Endpoints `/api/**`
+
 - API endpoints that provide request pre-processing and proxying to the [Rebus Ink API server](https://github.com/RebusFoundation/reader-api)
 - Signed URL generation for direct uploading to a Google Storage bucket (other storage backends aren't supported)
 - A Google Cloud Function that processes uploaded files and turns them into more easily processable JSON files (using [`ink-engine`](https://github.com/RebusFoundation/ink-engine)). Found at [`functions/onfinalize/index.js`](functions/onfinalize)
