@@ -11,6 +11,10 @@ in the context of the running container, either by (a) prefixing the commands wi
 `docker compose exec frontend` or (b) by "shelling" into the container `docker compose exec frontend bash`.
 
 ## Configuration
+=======
+* Node.js (specified by `engines.node` in `package.json`)
+
+## Setup
 
 The front-end can run against a local or hosted instance of the API server (recommended if
 contributing the front-end only). To setup the front-end service for local development, clone this
@@ -27,6 +31,11 @@ member):
     $ npm install
 
 ## Running the server
+
+=======
+Install the Node modules:
+
+    $ npm install
 
 Run the front-end development server:
 
@@ -80,6 +89,7 @@ Or to watch:
 | `deploy-production`   | deploys the app to production                                                                                  |
 | `save-config`         | saves the app.yaml config file from env, used by the GitHub Action for automatic deployments                   |
 | `save-keyfile`        | saves the keyfile from env, necessary if hosting outside of the Google Cloud Platform                          |
+<<<<<<< HEAD
 
 ## Versioning
 
@@ -90,3 +100,5 @@ Minor: New features and added functionality
 Patch: Small changes to features and bug fixes
 
 Version number was set to 1.0.0 on May 5, 2022
+=======
+

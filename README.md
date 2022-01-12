@@ -1,3 +1,5 @@
+=======
+# Rebus Ink "Library" Front-End Service
 
 The Rebus Ink "Library" service is a browser-based tool for research workflow to support researchers to
 better manage and draw insights from their collected sources. It’s a front-end service for the
@@ -14,10 +16,10 @@ Key libraries:
 
 Key third-party services:
 
-* [Google Cloud Platform](https://cloud.google.com): deployment and services including
-  [Cloud Storage](https://cloud.google.com/storage).
 * [Auth0](https://auth0.com): authentication and authorization.
 * [Redis Labs](https://redis.com): in-memory data structure store and cache.
+* [Auth0](https://auth0.com): for authentication and authorization.
+
 
 For more details, see the [Overview Guide](./docs/overview.md).
 
