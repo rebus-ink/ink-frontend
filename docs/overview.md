@@ -3,13 +3,18 @@
 A [Svelte](https://svelte.dev/) Single-Page App with Server-Side Rendering (SSR).
 ## Feature Summary
 
-|    Feature     |                  URL                   |
-| -------------- | -------------------------------------- |
-| Dashboard      | `/`                                    |
-| Source Library | `/library/*/*`                         |
-| Note Library   | `/notes/*/*`, `/notes/*/*/:id`         |
-| Reader UI      | `/sources/:storageId/:sourceId/:path+` |
-| Reader Profile |                                        |
+The base route maps the feature to the path located in `src/routes`.
+
+|      Feature      |                       Description                        |  Base Route  |
+| ----------------- | -------------------------------------------------------- | ------------ |
+| Dashboard         | Recent sources, notes, notebooks                         | `/`          |
+| Source Library    | Source documents and other media                         | `/library`   |
+| Note Library      | Notes added to sources                                   | `/notes`     |
+| Notebooks Library | Collects sources, notes and pages                        | `/notebooks` |
+| Reader UI         | View, bookmark and annotate sources                      | `/sources`   |
+| Pages             | Create outlines (mindmaps and affinity maps coming soon) | `/pages`     |
+| Reader Profile    | Reader profile including activity and login information  | `/readers`   |
+| Advanced Search   | Search across sources, notes and notebooks               | `/search`    |
 
 ## Key Components
 
