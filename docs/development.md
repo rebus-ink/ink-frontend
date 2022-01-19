@@ -18,6 +18,8 @@ Install the Node modules:
 
     $ npm install
 
+## Running the server
+
 Run the front-end development server:
 
     $ npm run dev # this may take a few seconds to start-up
