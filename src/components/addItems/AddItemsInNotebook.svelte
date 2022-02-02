@@ -1,7 +1,6 @@
 <script>
   // general component to wrap adding notes, sources or pages
   // to a notebook
-
   import NotesSearch from "../widgets/NotesSearch.svelte";
   import ArrowDropDown from "../img/ArrowDropDown.svelte";
   import Search from "../widgets/Search.svelte";

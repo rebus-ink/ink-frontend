@@ -83,7 +83,11 @@ export const put = async function put(req,res,next) {
 }
 
 export const post = async function post(req, res, next) {
+<<<<<<< HEAD
   if (!req.user || !req.user.profile) return res.sendStatus(401);  
+=======
+  if (!req.user || !req.user.profile) return res.sendStatus(401);
+>>>>>>> fd32486 (cleaning up components)
   const collection = req.body._collection;
   const tags = req.body._tags;
   delete req.body.collection;

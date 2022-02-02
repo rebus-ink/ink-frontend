@@ -1,7 +1,6 @@
 <script>
   import IcoRemove from "../../img/IcoRemove.svelte";
   import IcoDelete from "../../img/IcoDelete.svelte";
-  import IcoExport from "../../img/IcoExport.svelte"
   import DeletionModal from "../../widgets/DeletionModal.svelte";
   import RemoveItemsModal from "./RemoveItemsModal.svelte";
   import { goto } from "@sapper/app";

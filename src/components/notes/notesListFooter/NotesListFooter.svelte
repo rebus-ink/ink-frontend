@@ -1,7 +1,10 @@
 <script>
   import IcoEdit from "../../img/IcoEdit.svelte";
   import IcoDelete from "../../img/IcoDelete.svelte";
+<<<<<<< HEAD:src/components/notes/notesListFooter/NotesListFooter.svelte
   import IcoExport from "../../img/IcoExport.svelte"
+=======
+>>>>>>> fd32486 (cleaning up components):src/components/notes/NotesListFooter.svelte
   import SecondaryButton from "../../widgets/SecondaryButton.svelte";
   import Button from "../../widgets/Button.svelte";
   import Footer from "../../library/footer/Footer.svelte";
@@ -454,5 +457,9 @@
     {/if}
   </form>
 {:else}
+<<<<<<< HEAD:src/components/notes/notesListFooter/NotesListFooter.svelte
   <DeletionModal {remove} bind:activeModal {type} plural={true} items={type === "note" ? notesListed : sourcesListed} />
+=======
+  <DeletionModal {remove} bind:activeModal {type} plural={true} items={notesListed} />
+>>>>>>> fd32486 (cleaning up components):src/components/notes/NotesListFooter.svelte
 {/if}
