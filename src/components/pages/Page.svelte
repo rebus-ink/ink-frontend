@@ -1,15 +1,12 @@
 <script>
   import { pageItem, page, refreshNotebook } from "../../stores";
   import { getToken } from "../../getToken";
-  import History from "../History.svelte";
-  import PageIcoOutline from "../img/PageIcoOutline.svelte";
-  import PageIcoMindmap from "../img/PageIcoMindmap.svelte";
-  import PageIcoGrouping from "../img/PageIcoGrouping.svelte";
+  import History from "../widgets/History.svelte";
   import PageTitle from "./Tools/PageTitle.svelte";
   import PageTypeCard from "./Tools/PageTypeCard.svelte";
-  import Loader from "../Loader.svelte";
+  import Loader from "../widgets/Loader.svelte";
   import { goto } from "@sapper/app";
-  import DeletionModalPage from "./Tools/DeletionModalPage.svelte";
+  import DeletionModalPage from "../widgets/DeletionModal.svelte";
 
   $: pageInfo = $pageItem;
   let activeModal = false;
@@ -103,5 +100,5 @@
   </div>
 {/if}
 {#if activeModal}
-  <DeletionModalPage {remove} bind:activeModal {pageInfo} />
+  <DeletionModalPage {remove} bind:activeModal type="page" {pageInfo} />
 {/if}

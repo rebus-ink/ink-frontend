@@ -9,14 +9,9 @@
     import FlagToDo from "../../img/FlagToDo.svelte";
     import FlagUrgent from "../../img/FlagUrgent.svelte";
     import IcoNotebook from "../../img/IcoNotebook.svelte"
-    import IcoTag from "../../source/source-highlight/IcoTag.svelte"
     import CloseIcon from "../../source/source-highlight/CloseIcon.svelte"
-    import IcoNewNote from "../../img/IcoNewNote.svelte";
-    import HighlightNotebooks from "../../source/source-highlight/HighlightNotebooks.svelte"
-    import HighlightFlags from "../../source/source-highlight/HighlightFlags.svelte"
-    import Button from "../../widgets/Button.svelte";
     import Closer from "../../widgets/Closer.svelte";
-    import WhiteButton from "../../workspace/WhiteButton.svelte";
+    import WhiteButton from "../../widgets/WhiteButton.svelte";
     import { send, receive } from "../../../routes/_crossfade.js";
     import { tick } from "svelte";
     import NoteEditor from "../../widgets/NoteEditor.svelte";

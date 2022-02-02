@@ -1,10 +1,10 @@
 <script>
   import { notebooks, clearSelected, selectedItems } from "../../stores";
-  import NotesListFooter from "../notes/NotesListFooter.svelte";
-  import SortSelect from "../workspace/SortSelect.svelte";
+  import NotesListFooter from "../notes/notesListFooter/NotesListFooter.svelte";
+  import SortSelect from "../library/SortSelect.svelte";
   import NoNotebooks from "../img/NoNotebooks.svelte";
-  import SearchNotebooks from "./Tools/SearchNotebooks.svelte";
-  import PaginationButtons from "../PaginationButtons.svelte";
+  import SearchNotebooks from "./SearchNotebooks.svelte";
+  import PaginationButtons from "../widgets/PaginationButtons.svelte";
   import NotebookCard from "./NotebookCard.svelte";
 
   import { stores } from "@sapper/app";

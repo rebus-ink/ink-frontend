@@ -3,7 +3,6 @@ import ISO6391 from "iso-639-1";
 
 // Make a list of fake notes: motivation, lang, id, body
 
-// This needs to filter by workspace
 export async function get(req, res, next) {
   if (!req.user || !req.user.profile) return res.sendStatus(401);
   const url = `${process.env.API_SERVER}notebooks/${req.params.notebookId}/notes/${req.params.noteId}`;
@@ -27,7 +26,6 @@ export async function get(req, res, next) {
     return res.json(JSON.parse(err.response.body));
   }
 }
-// This needs to filter by workspace
 export async function put(req, res, next) {
   const url = `${process.env.API_SERVER}notebooks/${req.params.notebookId}/notes/${req.params.noteId}`;
   delete req.body._tags;

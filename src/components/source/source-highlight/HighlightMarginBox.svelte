@@ -7,7 +7,7 @@
   } from "../source-margin/processNote.js";
   import { assignIco } from "../source-margin/assignIco.js";
   import { setColour } from "./setColour.js";
-  import DateFormat from "../../notes/Date.svelte";
+  import DateFormat from "../../widgets/Date.svelte";
   import HighlightMarginEdit from "./HighlightMarginEdit.svelte";
   import IcoNotebook from "../../img/IcoNotebook.svelte";
   import HighlightButton from "./HighlightButton.svelte";

@@ -2,10 +2,8 @@ import got from "got";
 
 export const post = async function post(req, res, next) {
   if (!req.user.profile) return res.sendStatus(401);
-  const workspace = req.body._workspace;
   const collection = req.body._collection;
   const tags = req.body._tags;
-  delete req.body._workspace;
   delete req.body.collection;
   delete req.body._tags;
 
@@ -34,15 +32,7 @@ export const post = async function post(req, res, next) {
           });
         }
       }
-      // Check workspace, if there is one, add
-      if (workspace) {
-        await got.put(`${response.id}/tags/${workspace}`, {
-          headers: {
-            "content-type": "application/ld+json",
-            Authorization: `Bearer ${req.user.token}`,
-          },
-        });
-      }
+
       // Check collection
       if (collection) {
         await got.put(`${response.id}/tags/${collection}`, {

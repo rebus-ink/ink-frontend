@@ -3,7 +3,7 @@
     isEmpty, sourcesEmpty, notesEmpty, 
     notebooksEmpty} from "../../stores"
   import NotesCard from "../notes/NotesCard.svelte"
-  import Card from "../workspace/Card.svelte"
+  import Card from "../library/Card.svelte"
   import NotebookCard from "../notebooks/NotebookCard.svelte"
 
 </script>

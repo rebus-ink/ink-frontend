@@ -15,7 +15,7 @@ export { inntbk, refreshInNtbk } from './inntbk'
 export { notes, refreshNotes, searchNotes, sourceNotes, 
   refreshSourceNotes } from './notes'
 export { notebooks, refreshNotebooks, searchNotebooks, addedNotebooks, defaultNotebook } from './notebooks'
-export { collections, workspaces, tags, refreshCollections, addingWorkspace, addedCollections, addedWorkspaces } from './collections'
+export { collections, tags, refreshCollections, addedCollections} from './collections'
 export { note, refreshNote } from './note'
 export { notebook, refreshNotebook } from './notebook'
 export { pageItem, refreshPageItem } from "./pageitem";

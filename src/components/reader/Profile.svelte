@@ -7,7 +7,7 @@
   import IcoStack from "../img/IcoStack.svelte";
   import IcoEdit from "../img/IcoEdit.svelte";
   import IcoCanvas from "../img/IcoCanvas.svelte";
-  import Loader from "../Loader.svelte";
+  import Loader from "../widgets/Loader.svelte";
   import { stores } from "@sapper/app";
   import {
     profileNotes,

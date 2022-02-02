@@ -1,14 +1,9 @@
 <script>
-  import { pageItem, page, refreshPageItem } from "../../../stores";
-  import { goto } from "@sapper/app";
-  import { getToken } from "../../../getToken";
-  import History from "../../History.svelte";
+
   import PageIcoOutline from "../../img/PageIcoOutline.svelte";
   import PageIcoMindmap from "../../img/PageIcoMindmap.svelte";
   import IcoStartArrow from "../../img/IcoStartArrow.svelte";
   import PageIcoGrouping from "../../img/PageIcoGrouping.svelte";
-  import PageTitle from "./PageTitle.svelte";
-  import Loader from "../../Loader.svelte";
 
   export let type;
   export let submit;

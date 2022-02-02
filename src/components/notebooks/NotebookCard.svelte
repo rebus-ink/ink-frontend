@@ -1,7 +1,7 @@
 <script>
   import { page, addSelected, removeSelected } from "../../stores";
   import IcoNotebook from "../img/IcoNotebook.svelte";
-  import DateFormat from "../notes/Date.svelte";
+  import DateFormat from "../widgets/Date.svelte";
 
   export let notebook = {};
   export let selecting;

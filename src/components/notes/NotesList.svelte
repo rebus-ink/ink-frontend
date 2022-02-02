@@ -1,13 +1,13 @@
 <script>
   import { notes, clearSelected, selectedItems } from "../../stores";
   import NotesCard from "./NotesCard.svelte";
-  import SortSelect from "../workspace/SortSelect.svelte";
+  import SortSelect from "../library/SortSelect.svelte";
   import NoNotes from "../img/NoNotes.svelte";
   import IcoFilter from "../img/IcoFilter.svelte";
-  import NotesSearch from "../NotesSearch.svelte";
-  import FilterNote from "../FilterNote.svelte";
-  import NotesListFooter from "./NotesListFooter.svelte";
-  import PaginationButtons from "../PaginationButtons.svelte";
+  import NotesSearch from "../widgets/NotesSearch.svelte";
+  import FilterNote from "../widgets/FilterNote.svelte";
+  import NotesListFooter from "./notesListFooter/NotesListFooter.svelte";
+  import PaginationButtons from "../widgets/PaginationButtons.svelte";
   import { stores } from "@sapper/app";
   const { page } = stores();
   let filterOn = false;

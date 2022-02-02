@@ -47,6 +47,7 @@ export function highlightRange(range, root) {
       //   return goto(highlight.dataset.href);
       // });
       if (node.parentElement instanceof SVGElement) {
+        console.log('is svg!!')
         // The issue here is that we are highlighting the text element not the text nodes
         // Should get the startposition and endposition of the character in the text node from the parent node
         svg = true;

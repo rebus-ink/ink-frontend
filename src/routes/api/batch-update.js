@@ -3,7 +3,6 @@
 //    Changes type
 //    Adds authors
 //    Adds collections (if necessary)
-//    Adds workspaces (if necessary)
 
 import got from "got";
 
@@ -34,66 +33,9 @@ export async function put(req, res, next) {
   if (!req.user.profile) return res.sendStatus(401);
   if (!req.body.items) return;
   // console.log(req.body);
-  // Check workspace, if there is one, add
   const ids = req.body.items.map((item) => item.id);
   let responses = [];
   for (const id of ids) {
-    try {
-      if (req.body["chooseWorkspace-public"]) {
-        const response = await addWorkspace(
-          req.body["chooseWorkspace-public"],
-          id,
-          req.user.token
-        );
-        responses = responses.concat(response);
-      }
-      if (req.body["chooseWorkspace-teaching"]) {
-        const response = await addWorkspace(
-          req.body["chooseWorkspace-teaching"],
-          id,
-          req.user.token
-        );
-        responses = responses.concat(response);
-      }
-      if (req.body["chooseWorkspace-research"]) {
-        const response = await addWorkspace(
-          req.body["chooseWorkspace-research"],
-          id,
-          req.user.token
-        );
-        responses = responses.concat(response);
-      }
-      if (req.body["chooseWorkspace-personal"]) {
-        const response = await addWorkspace(
-          req.body["chooseWorkspace-personal"],
-          id,
-          req.user.token
-        );
-        responses = responses.concat(response);
-      }
-      if (req.body.addedCollections) {
-        for (const tag of req.body.addedCollections) {
-          const response = await addWorkspace(tag.value, id, req.user.token);
-          responses = responses.concat(response);
-        }
-      }
-
-      if (req.body.addedWorkspaces && req.body.addedWorkspaces !== "all") {
-        for (const workspace of req.body.addedWorkspaces) {
-          await got
-            .put(`${id}tags/${workspace.id}`, {
-              headers: {
-                "content-type": "application/ld+json",
-                Authorization: `Bearer ${req.user.token}`,
-              },
-            })
-            .json();
-        }
-      }
-    } catch (err) {
-      console.log(err);
-      responses = responses.concat(err.response.body);
-    }
     let patch;
 
     if (req.body.addedNotebooks) {
@@ -155,13 +97,3 @@ export async function put(req, res, next) {
   // if change collection, add pub to collection one by one.
 }
 
-function addWorkspace(workspace, id, token) {
-  return got
-    .put(`${id}tags/${workspace}`, {
-      headers: {
-        "content-type": "application/ld+json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .json();
-}

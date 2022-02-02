@@ -1,7 +1,5 @@
 <script>
-    import Button from "../../widgets/Button.svelte";
     import { getToken } from "../../../getToken";
-    import IcoGoBack from "../../img/IcoGoBack.svelte";
     import IcoEdit from "../../img/IcoEdit.svelte";
     import IcoNewTab from "../../img/IcoNewTab.svelte"
     import { onMount } from "svelte"

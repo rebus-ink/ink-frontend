@@ -1,10 +1,5 @@
 <script>
-  import History from "../../History.svelte";
   import IcoDelete from "../../img/IcoDelete.svelte";
-  import ArrowDropDown from "../../img/ArrowDropDown.svelte";
-  import { page } from "../../../stores";
-  import { getToken } from "../../../getToken";
-  import { goto } from "@sapper/app";
 
   export let pageInfo;
   export let activeModal;

@@ -73,7 +73,6 @@ export async function get(req, res, next) {
     return res.json(JSON.parse(err.response.body));
   }
 }
-// This needs to filter by workspace
 export async function put(req, res, next) {
   const url = `${process.env.API_SERVER}sources/${req.params.publicationId}`;
   delete req.body.keywords;

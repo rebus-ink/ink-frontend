@@ -1,6 +1,6 @@
 <script>
   import Card from "../../widgets/Card.svelte";
-  import Loader from "../../Loader.svelte";
+  import Loader from "../../widgets/Loader.svelte";
   import { source$ } from "../../../../state/state";
   import { refresh } from "../../../../state/refresh";
   import IcoEdit from "../../img/IcoEdit.svelte";

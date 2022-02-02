@@ -2,10 +2,7 @@
   import EmptySourcePasteForm from "./EmptySourcePasteForm.svelte";
   import EmptySourceUploadForm from "./EmptySourceUploadForm.svelte";
   import TitleBar from "../source-titlebar/TitleBar.svelte";
-  import EmptySourcePaster from "./EmptySourcePaster.svelte"
-  // import { onMount } from 'svelte';
   import Button from "../../widgets/Button.svelte";
-  import UploadIcon from "./UploadIcon.svelte";
   import EmptySourceNotes from "./EmptySourceNotes.svelte"
   import UrlForm from "./UrlForm.svelte"
   export let source;

@@ -1,7 +1,7 @@
 <script>
-  import Workspace from "../../../../components/Workspace.svelte";
+  import Library from "../../../../components/library/Library.svelte";
   import { stores } from "@sapper/app";
   const { page } = stores();
 </script>
 
-<Workspace workspace={$page.params.workspace} />
+<Library />

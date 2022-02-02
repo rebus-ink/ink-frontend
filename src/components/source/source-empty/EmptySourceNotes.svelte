@@ -5,9 +5,7 @@
     import EmptySourceNewNote from "./EmptySourceNewNote.svelte"
     import ArrowDropDown from "../../img/ArrowDropDown.svelte"
 
-   // import NewNoteToolbar from "./NewNoteToolbar.svelte"
     import { sourceNotes, notebooks, defaultNotebook } from "../../../stores"
-   // import DefaultNotebookForm from "../../publication/reader/DefaultNotebookForm.svelte"
    let items;
     $: items = $notebooks ? $notebooks.items : [];
     $: if (!items.length || items[0].id !== 'none') items.unshift({id: 'none', name: '--no notebook--'})

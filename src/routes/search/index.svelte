@@ -1,5 +1,5 @@
 <script>
-    import SearchPage from "../../components/SearchPage.svelte"
+    import SearchPage from "../../components/search/SearchPage.svelte"
   </script>
   
   <SearchPage />
