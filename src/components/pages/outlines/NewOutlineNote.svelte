@@ -140,7 +140,7 @@
 
     try {
        window.fetch(
-        `/api/pages/${$page.params.pageId}/outlines/${$page.params.outlineId}/notes`,
+        `/api/outlines/${$page.params.outlineId}/notes`,
         {
           method: 'POST',
           credentials: "include",

@@ -33,12 +33,6 @@
     if (!selecting) selecting = true;
   };
 
-  async function moveNotes() {
-    selecting = false;
-    await addNoteToEnd()
-    clearSelected()
-  }
-
   function randomString() {
     let result = [];
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -136,7 +130,7 @@ async function handleResponse(status, notes) {
     clearSelected()
     try {
        await window.fetch(
-        `/api/pages/${$page.params.pageId}/outlines/${$page.params.outlineId}/notes`,
+        `/api/outlines/${$page.params.outlineId}/notes`,
         {
           method: 'POST',
           credentials: "include",

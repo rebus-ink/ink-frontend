@@ -1,6 +1,6 @@
 import got from "got";
 import crypto from "crypto";
-import { note } from "../../../../../../../stores";
+import { note } from "../../../../../stores";
 export async function patch(req, res, next) {
   const url = `${process.env.API_SERVER}outlines/${req.params.outlineId}/notes/${req.body.shortId}`;
   delete req.body.shortId;

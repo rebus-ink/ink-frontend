@@ -135,7 +135,7 @@
 
     try {
       fetch(
-        `/api/pages/${$page.params.pageId}/outlines/${$page.params.outlineId}/notes`,
+        `/api/outlines/${$page.params.outlineId}/notes`,
         {
           method: "PATCH",
           credentials: "include",
@@ -161,7 +161,7 @@
     requesting = true;
     try {
       await fetch(
-        `/api/pages/${$page.params.pageId}/outlines/${$page.params.outlineId}/notes`,
+        `/api/outlines/${$page.params.outlineId}/notes`,
         {
           method: "DELETE",
           credentials: "include",

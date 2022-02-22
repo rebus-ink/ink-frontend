@@ -21,7 +21,7 @@ export const pageItem = derived(
       return;
     if (!process.browser || !$pageItemId) return;
 
-    const url = `/api/pages/${$pageItemId}`;
+    const url = `/api/outlines/${$pageItemId}`;
     return fetch(url)
       .then((lib) => {
         set(lib);

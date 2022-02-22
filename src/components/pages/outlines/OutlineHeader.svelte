@@ -22,7 +22,7 @@
     goto(`notebooks/${notebook.shortId}`);
 
     try {
-      await fetch(`/api/pages/${$page.params.pageId}`, {
+      await fetch(`/api/outlines/${$page.params.pageId}`, {
         method: "DELETE",
         credentials: "include",
         headers: {
@@ -42,7 +42,7 @@
 
     try {
       await fetch(
-        `/api/pages/${$page.params.pageId}/outlines/${$page.params.outlineId}`,
+        `/api/outlines/${$page.params.outlineId}`,
         {
           method: "PUT",
           credentials: "include",

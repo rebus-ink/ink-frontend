@@ -70,7 +70,7 @@ export const outline = derived(
       return;
     if (!process.browser || !$outlineId) return;
 
-    const url = `/api/pages/${$page.params.pageId}/outlines/${$page.params.outlineId}`;
+    const url = `/api/outlines/${$page.params.outlineId}`;
 
     return fetch(url)
       .then((lib) => {

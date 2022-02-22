@@ -15,7 +15,7 @@ export const outlines = derived(
     if ($page.query.returnTo) return;
     set({ type: "loading", items: [] });
 
-    return fetch(`/api/pages/${$page.params.pageId}/outlines`)
+    return fetch(`/api/outlines`)
       .then((lib) => {
         set(lib);
       })

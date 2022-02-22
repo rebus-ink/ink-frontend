@@ -20,7 +20,7 @@
       );
 
       await window
-        .fetch(`/api/pages`, {
+        .fetch(`/api/outlines`, {
           method: "POST",
           credentials: "include",
           body: JSON.stringify(payload),
@@ -37,13 +37,6 @@
     }
   }
 
-  let click = () => {
-    open = !open;
-    title = "";
-  };
-  let init = (e) => {
-    e.focus();
-  };
 </script>
 
 <style>

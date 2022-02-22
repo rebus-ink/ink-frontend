@@ -150,7 +150,7 @@
 
 <div class="Item">
   <a
-    href={outline ? `pages/${item.shortId}/outlines/${outline.shortId}?notebook=${item.notebookId}` : $page.path}>
+    href={outline ? `outlines/${outline.shortId}?notebook=${item.notebookId}` : $page.path}>
     _
   </a>
   {#if selectable}
