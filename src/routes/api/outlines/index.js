@@ -61,6 +61,7 @@ console.log('req?', req.body)
     }
   }
 };
+<<<<<<< HEAD:src/routes/api/outlines/index.js
 
 export async function get(req, res, next) {
   if (!req.user.profile) return res.sendStatus(401);
@@ -86,3 +87,5 @@ export async function get(req, res, next) {
     return res.json(JSON.parse(err.response.body));
   }
 }
+=======
+>>>>>>> e99a839 (removed canvas):src/routes/api/pages/index.js
