@@ -18,7 +18,6 @@ Key third-party services:
 * [Google Cloud Platform](https://cloud.google.com): deployment and services including
   [Cloud Storage](https://cloud.google.com/storage).
 * [Auth0](https://auth0.com): authentication and authorization.
-* [Mailgun](https://www.mailgun.com): email delivery service.
 * [Redis Labs](https://redis.com): in-memory data structure store and cache.
 
 For more details, see the [Overview Guide](./docs/overview.md).
