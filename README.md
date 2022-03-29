@@ -1,4 +1,4 @@
-# `ink-library` -- The front end service for Rebus Ink
+# `ink-frontend` -- The front end service for Rebus Ink
 
 ## Building
 

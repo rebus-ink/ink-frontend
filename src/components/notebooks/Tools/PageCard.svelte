@@ -26,7 +26,7 @@
   } else {
     selectable = true;
   }
-  $: outline = item.noteContexts[0];
+  $: outline = item;
   $: pageItems = $pages.items.find((element) => element.name === item.name);
   $: noteContexts = pageItems ? pageItems.noteContexts : [];
 </script>
