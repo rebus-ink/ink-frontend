@@ -15,7 +15,7 @@ Both also require you to be signed in using the gcloud utility and have user acc
 
 ## Github Action
 
-The GitHub action attached to the `ink-library` repository is set up to automatically deploy to development if the tests pass. It does so using an `app.yaml` file that's saved as an ENV secret in the repository's settings and written out to a file as a part of the action.
+The GitHub action attached to the `ink-frontend` repository is set up to automatically deploy to development if the tests pass. It does so using an `app.yaml` file that's saved as an ENV secret in the repository's settings and written out to a file as a part of the action.
 
 ## Deploying Cloud Functions
 
@@ -26,7 +26,7 @@ To deploy the cloud functions you need to change your working directory to `func
 
 ## Setting up the Google Cloud Function for processing uploaded files
 
-Again, you need to work from the functions/onfinalize directory in the ink-library project.
+Again, you need to work from the functions/onfinalize directory in the ink-frontend project.
 
 You need to begin by making sure that you are working with the intended gcloud project as the default project. Otherwise you will run into permission issues. Either set gcloud to use that project as default or always add --project=YOUR_PROJECT to the gcloud command.
 

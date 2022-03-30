@@ -36,11 +36,18 @@ const redis = require("redis");
 // import firesession from 'firestore-store'
 
 const RedisStore = makeStore(session);
-const client = redis.createClient({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-  password: process.env.REDIS_PASSWORD,
-});
+
+let client;
+(async () => {
+  client = redis.createClient({
+    url: `redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${
+      process.env.REDIS_PORT
+    }`
+  })
+  client.on('error', (err) => console.log('Redis Client Error', err))
+
+  await client.connect()
+})();
 
 if (dev) {
   // const result = dotenv.config();
@@ -53,6 +60,7 @@ if (dev) {
 }
 
 export function setup(sapper, options = {}) {
+
   const app = express();
 
   app.enable("strict routing");
@@ -60,7 +68,7 @@ export function setup(sapper, options = {}) {
   app.set("trust proxy", true);
 
   const sessionMiddleware = session({
-    store: new RedisStore({ client }),
+  //  store: new RedisStore({ client }),
     secret: process.env.COOKIE_KEY || "randome stuff",
     resave: false,
     rolling: true,
