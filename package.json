@@ -32,7 +32,7 @@
     }
   },
   "engines": {
-    "node": ">10"
+    "node": ">12"
   },
   "healthier": {
     "env": {
@@ -97,11 +97,11 @@
     "redis": "^4.0.4",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^6.6.3",
-    "sharp": "^0.23.4",
-    "short-uuid": "^3.1.1",
+    "sharp": "^0.30.3",
+    "short-uuid": "^4.2.0",
     "striptags": "^3.2.0",
-    "tslib": "^2.0.3",
-    "turndown": "^7.0.0",
+    "tslib": "^2.3.1",
+    "turndown": "^7.1.1",
     "universal-base64url": "^1.1.0"
   },
   "devDependencies": {
@@ -112,7 +112,7 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/runtime": "^7.11.2",
     "@esm-bundle/chai": "^4.1.5",
-    "@open-wc/testing": "^2.5.32",
+    "@open-wc/testing": "^3.1.2",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-typescript": "^6.1.0",
     "@rollup/plugin-url": "^6.0.0",
@@ -129,9 +129,9 @@
     "fetch-mock": "^9.11.0",
     "friendly-words": "^1.1.10",
     "globby": "^11.0.2",
-    "healthier": "3.2.0",
+    "healthier": "^5.0.1",
     "intersection-observer": "^0.7.0",
-    "mocha": "^8.2.1",
+    "mocha": "^9.2.2",
     "npm-run-all": "^4.1.5",
     "postcss-load-config": "^2.1.0",
     "prettier": "1.19.1",
@@ -150,7 +150,7 @@
     "svelte-check": "^1.2.5",
     "svelte-dnd-action": "^0.6.22",
     "svelte-preprocess": "^4.6.9",
-    "tap": "^14.10.8",
+    "tap": "^16.0.1",
     "tiny-lr": "^1.1.1",
     "typescript": "^4.0.5"
   }
