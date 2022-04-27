@@ -1,10 +1,7 @@
 <script>
   import IcoEdit from "../../img/IcoEdit.svelte";
   import IcoDelete from "../../img/IcoDelete.svelte";
-<<<<<<< HEAD:src/components/notes/notesListFooter/NotesListFooter.svelte
   import IcoExport from "../../img/IcoExport.svelte"
-=======
->>>>>>> fd32486 (cleaning up components):src/components/notes/NotesListFooter.svelte
   import SecondaryButton from "../../widgets/SecondaryButton.svelte";
   import Button from "../../widgets/Button.svelte";
   import Footer from "../../library/footer/Footer.svelte";
@@ -163,6 +160,7 @@
   $: if (type !== "note") {
     menu = menu.filter((i) => i !=="Export")
   }
+
   $: if ($page.path.startsWith("/notebooks"))
     menu = menu.filter((i) => i !== "Edit");
 
@@ -176,6 +174,7 @@
 
   async function exportSelected() {
     const body = { items: Array.from($selectedNotes) };
+
     try {
       await fetch('/export/notes', {
         method: "POST",
@@ -189,11 +188,13 @@
       });
 
       let server
-      if ($page && $page.host === 'localhost:3000') {
-        server = 'http://localhost:3000'
+
+      if ($page && $page.host === 'app.rebus.ink' ) {
+        server = "https://ink-api-dev-dot-thematic-cider-139815.appspot.com/" 
       } else {
-        server = `https://${$page.host}` 
+        server = 'https://ink-server-dev-dot-thematic-cider-139815.appspot.com' 
       }
+      server = 'http://localhost:3000'
 
       const url = `${server}/export/notes`;
       window.location.replace(url);
@@ -457,9 +458,6 @@
     {/if}
   </form>
 {:else}
-<<<<<<< HEAD:src/components/notes/notesListFooter/NotesListFooter.svelte
-  <DeletionModal {remove} bind:activeModal {type} plural={true} items={type === "note" ? notesListed : sourcesListed} />
-=======
+
   <DeletionModal {remove} bind:activeModal {type} plural={true} items={notesListed} />
->>>>>>> fd32486 (cleaning up components):src/components/notes/NotesListFooter.svelte
 {/if}

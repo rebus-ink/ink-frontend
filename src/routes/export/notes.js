@@ -10,6 +10,7 @@ const {
 
   let docxExport;
 
+
   const extractChildren = (children, fontSize) => {
     return children.map(child => {
       if (child.link) {
@@ -37,6 +38,7 @@ const {
   let sources = []
   let children = []
 
+
   
   const listToDocx = list => {
 
@@ -50,7 +52,7 @@ const {
               body.content = `HIGHLIGHT: ${body.content}`
           } else {
               body.content = `NOTE: ${body.content}`
-          }
+          } 
 
           let paragraphs = htmlToDocxObject(body.content)
           let fontSize = 24
@@ -81,6 +83,7 @@ const {
               children.push(new Paragraph({text: ''}))
               children.push(new Paragraph({text: ''}))
 
+              
             } else {
               children.push(
                 new Paragraph({
@@ -88,8 +91,6 @@ const {
                 })
               )
               children.push(new Paragraph({text: ''}))
-              children.push(new Paragraph({text: ''}))
-
             }
           })
   
@@ -123,6 +124,7 @@ const {
   
     if (sources.length) {
       sources = sources.map(source => source.name)
+
       sources = [... new Set(sources)]
 
       children.push(
@@ -154,11 +156,14 @@ const {
 
     sources = [];
     children = [];
+
     return notesDoc
   }
 
 
+
   export async function post(req, res, next) {
+
     docxExport = listToDocx(req.body)
 
     res.send()

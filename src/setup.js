@@ -49,6 +49,7 @@ let client;
   await client.connect()
 })();
 
+
 if (dev) {
   // const result = dotenv.config();
   // if (result.error) {
@@ -66,11 +67,6 @@ export function setup(sapper, options = {}) {
   app.set("trust proxy", true);
 
   const sessionMiddleware = session({
-<<<<<<< HEAD
-  //  store: new RedisStore({ client }),
-=======
-    //store: new RedisStore({ client }),
->>>>>>> 32b5763 (export notes)
     secret: process.env.COOKIE_KEY || "randome stuff",
     resave: false,
     rolling: true,
