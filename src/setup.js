@@ -37,9 +37,9 @@ const redis = require("redis");
 
 const RedisStore = makeStore(session);
 const client = redis.createClient({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-  password: process.env.REDIS_PASSWORD,
+  url: `redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${
+    process.env.REDIS_PORT
+  }`
 });
 
 if (dev) {
@@ -48,8 +48,6 @@ if (dev) {
   //   throw result.error;
   // }
   process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0; // eslint-disable-line
-}
-if (dev) {
 }
 
 export function setup(sapper, options = {}) {
@@ -60,7 +58,7 @@ export function setup(sapper, options = {}) {
   app.set("trust proxy", true);
 
   const sessionMiddleware = session({
-    store: new RedisStore({ client }),
+    //store: new RedisStore({ client }),
     secret: process.env.COOKIE_KEY || "randome stuff",
     resave: false,
     rolling: true,

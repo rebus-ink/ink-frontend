@@ -1,6 +1,7 @@
 <script>
   import IcoEdit from "../../img/IcoEdit.svelte";
   import IcoDelete from "../../img/IcoDelete.svelte";
+  import IcoExport from "../../img/IcoExport.svelte"
   import SecondaryButton from "../../widgets/SecondaryButton.svelte";
   import Button from "../../widgets/Button.svelte";
   import Footer from "../../library/footer/Footer.svelte";
@@ -140,7 +141,7 @@
     });
   }
 
-  $: menu = ["Delete", "Check all", "Edit", "Close"];
+  $: menu = ["Delete", "Export", "Check all", "Edit", "Close"];
   $: if ($page.path.startsWith("/notebooks"))
     menu = menu.filter((i) => i !== "Edit");
 
@@ -148,8 +149,43 @@
     if (func === "Delete") activeModal = true;
     else if (func === "Edit") editing = true;
     else if (func === "Check all") chooseAll();
+    else if (func === "Export") exportSelected();
     else endSelection();
   };
+
+  async function exportSelected() {
+    const body = { items: Array.from($selectedItems) };
+    try {
+      await fetch('/export/notes', {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "csrf-token": getToken(),
+        },
+        body: JSON.stringify(body),
+      });
+
+      let server
+      console.log($page.host)
+      if ($page && $page.host === 'app.rebus.ink' ) {
+        server = "https://ink-api-dev-dot-thematic-cider-139815.appspot.com/" 
+      } else {
+        server = 'https://ink-server-dev-dot-thematic-cider-139815.appspot.com' 
+      }
+      server = 'http://localhost:3000'
+
+      const url = `${server}/export/notes`;
+      window.location.replace(url);
+
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+// Content Security Policy: The page’s settings blocked the loading of a resource at data:font/woff2;charset=utf-8;base64,d09… (“font-src”).
+
 
   function assignIco(icon) {
     switch (icon) {
@@ -157,6 +193,8 @@
         return IcoDelete;
       case "Edit":
         return IcoEdit;
+      case "Export":
+        return IcoExport;
     }
   }
 </script>
