@@ -87,6 +87,7 @@
     $selectedNotebooks = _.uniqBy($selectedNotebooks, (e) => {
       return e.id
     })
+
   }
 
   function click() {
@@ -110,6 +111,7 @@
     if ($page) {
         goto($page.path)
       }
+
 
   }
   let text;
@@ -167,6 +169,7 @@
 
       $selectedNotebooks = [];
       $selectedSource = null;
+
       if ($page.path === "/") $refreshInNote = Date.now();
       else if (atNotebook) ntbkClose();
       else $refreshNotes = Date.now();
@@ -641,7 +644,8 @@
       </div>
       {#if itemState === 'new'}
       <div>
-        <p>Pages: </p>
+
+        <label>Pages: </label>
         <input 
           class="page-input" 
           type="text" bind:value={pageNumber} />
@@ -683,7 +687,7 @@
       {/if}
 
       {#if $selectedNotebooks && $selectedNotebooks.length}
-      
+
         {#each $selectedNotebooks as notebook}
           <span class="Flag Item">
             <IcoNotebook />

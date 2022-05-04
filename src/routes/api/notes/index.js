@@ -3,6 +3,7 @@ import mammoth from "mammoth";
 let notebooks, sourceId, tags, skipDuplicates;
 
 
+
 // Patch is used to send the notebooks, source or any other information
 // that is not in the docx file
 export const patch = async function patch(req,res,next) {
@@ -11,6 +12,7 @@ export const patch = async function patch(req,res,next) {
   sourceId = req.body.sourceId;
   tags = req.body.tags
   skipDuplicates = req.body.skipDuplicates;
+
   res.json({})
 
 }
@@ -76,18 +78,16 @@ export const put = async function put(req,res,next) {
         json: body,
       })
       .json();
-    })
-
+    }) 
+  
   res.json({})
 
 }
 
 export const post = async function post(req, res, next) {
-<<<<<<< HEAD
+
   if (!req.user || !req.user.profile) return res.sendStatus(401);  
-=======
-  if (!req.user || !req.user.profile) return res.sendStatus(401);
->>>>>>> fd32486 (cleaning up components)
+
   const collection = req.body._collection;
   const tags = req.body._tags;
   delete req.body.collection;

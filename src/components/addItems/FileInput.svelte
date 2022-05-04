@@ -3,6 +3,7 @@
   import { getToken } from "../../getToken";
   import Button from "../widgets/Button.svelte"
   import {refreshNotes, refreshSourceNotes, refreshInNote, selectedNotebooks, selectedSource, tags} from "../../stores"
+
   export let name;
   export let placeholder = "";
   export let dark = false;
@@ -27,6 +28,7 @@
   let file;
   let atNotebook;
   let skipDuplicates = false;
+
   $: atNotebook =
     $page.path && $page.path.startsWith("/notebooks/") ? true : false;
 
@@ -40,6 +42,7 @@
     if ($selectedSource || 
     ($selectedNotebooks && $selectedNotebooks.length) || noteColour || skipDuplicates) {
 
+
       let body = {};
       if ($selectedNotebooks && $selectedNotebooks.length) {
         body.notebooks = $selectedNotebooks;
@@ -52,6 +55,7 @@
         body.sourceId = source.shortId;
       }
 
+
       if (noteColour) {
         body.tags = $tags.getIds([noteColour]);
       }
@@ -59,6 +63,7 @@
       if (skipDuplicates) {
         body.skipDuplicates = skipDuplicates
       }
+
 
       await fetch("/api/notes", {
         method: "PATCH",
@@ -93,6 +98,7 @@
         $refreshSourceNotes = Date.now();
       }
 
+
       await close()
 
 
@@ -101,6 +107,7 @@
   async function change(event) {
     file = event.target.files[0];
     fileName = file.name;
+    if (!notesImport) {
 
     if (!notesImport) {
 
@@ -153,6 +160,7 @@
     } else {
       error = true;
     }
+
   }
 
   }
