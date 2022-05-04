@@ -13,7 +13,7 @@ export { insource, refreshInSource } from './insource'
 export { innote, refreshInNote } from './innote'
 export { inntbk, refreshInNtbk } from './inntbk'
 export { notes, refreshNotes, searchNotes, sourceNotes, 
-  refreshSourceNotes } from './notes'
+  refreshSourceNotes, selectedNotebooks, selectedSource } from './notes'
 export { notebooks, refreshNotebooks, searchNotebooks, addedNotebooks, defaultNotebook } from './notebooks'
 export { collections, tags, refreshCollections, addedCollections} from './collections'
 export { note, refreshNote } from './note'
