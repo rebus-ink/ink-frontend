@@ -119,7 +119,6 @@ const {
   
     if (sources.length) {
       sources = sources.map(source => source.name)
-      
       sources = [... new Set(sources)]
 
       children.push(
