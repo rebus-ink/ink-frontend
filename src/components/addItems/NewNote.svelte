@@ -15,24 +15,28 @@
   import Button from "../widgets/Button.svelte";
   import Closer from "../widgets/Closer.svelte";
   import WhiteButton from "../widgets/WhiteButton.svelte";
+  import TabsSection from "./TabsSection.svelte"
+  import FileInput from "./FileInput.svelte"
   import { tick } from "svelte";
   import NoteEditor from "../widgets/NoteEditor.svelte";
   import { getToken } from "../../getToken";
-  import { notebooks, refreshNotes, refreshInNote, tags, profileSources, library } from "../../stores";
+  import { notebooks, refreshNotes, refreshInNote, tags, 
+    profileSources, library, selectedNotebooks, 
+    selectedSource } from "../../stores";
   import { stores } from "@sapper/app";
 
   const { page } = stores();
   export let note = { body: [], source: { name: "" } };
   let pageNumber;
   let selectedFlags = [];
-  let selectedNotebooks = [];
-  let selectedSource;
+
   let error = false;
   const colours = ["colour1", "colour2", "colour3", "colour4"];
   $: if (error && striptags(text) !== "") {
     error = false;
   }
   let sources;
+  let itemState = "new"
   let notebooksList;
     $: notebooksList = $notebooks ? $notebooks.items : [];
     $: if($notebooks) {
@@ -76,7 +80,7 @@
   let initialNotebook = true;
   $: if (atNotebook && notebooksList && notebooksList.length && initialNotebook) {
     const notebook = notebooksList.find(x => x.shortId === $page.params.id)
-    selectedNotebooks.push(notebook)
+    $selectedNotebooks.push(notebook)
   }
 
   function click() {
@@ -92,6 +96,12 @@
       await tick();
       newToggle.querySelector("button").focus();
     }
+
+    if (itemState === "upload") {
+      $selectedNotebooks = [];
+      $selectedSource = null;
+    }
+
   }
   let text;
   $: flagsArr = $tags.items.filter(
@@ -124,10 +134,10 @@
         });
       }
 
-      if (selectedSource) {
-        payload.sourceId = selectedSource.shortId
+      if ($selectedSource) {
+        payload.sourceId = $selectedSource.shortId
       }
-      payload.notebooks = selectedNotebooks;
+      payload.notebooks = $selectedNotebooks;
 
 
       let url = atNotebook
@@ -146,8 +156,8 @@
         },
       });
 
-      selectedNotebooks = [];
-      selectedSource = null;
+      $selectedNotebooks = [];
+      $selectedSource = null;
 
       if ($page.path === "/") $refreshInNote = Date.now();
       else if (atNotebook) ntbkClose();
@@ -160,15 +170,19 @@
   }
   function changeSource(event) {
     event.preventDefault();
-    selectedSource = sources.find(source => source.shortId === event.target.value)
+    $selectedSource = sources.find(source => source.shortId === event.target.value)
+  }
+
+  function menu(state) {
+    if (state) itemState = state;
   }
 
   function changeNotebook(e) {
     initialNotebook = false;
-      const index = selectedNotebooks.findIndex(x => x.name === e.target.value)
+      const index = $selectedNotebooks.findIndex(x => x.name === e.target.value)
       if (index === -1) {
         let filterResults = notebooksList.filter(notebook => notebook.name === e.target.value)
-        selectedNotebooks = selectedNotebooks.concat(filterResults[0])
+        $selectedNotebooks = $selectedNotebooks.concat(filterResults[0])
       }
     }
 
@@ -177,6 +191,7 @@
 </script>
 
 <style>
+  
   .error-message {
     color: red;
   }
@@ -577,25 +592,28 @@
 {#if open || atNotebook}
   <div class="NewBox newNote">
 
-
+    <TabsSection {menu} {itemState} />
     <form
       id="newform"
       class="newForm"
       action="/api/create-publication"
       on:submit={submit}>
+
       <div class="options">
-      <ul class="colours">
-        {#each colours as colour}
-          <li>
-            <input
-              name="noteColour"
-              type="radio"
-              class={colour}
-              bind:group={noteColour}
-              value={colour} />
-          </li>
-        {/each}
-      </ul>
+
+        <ul class="colours">
+          {#each colours as colour}
+            <li>
+              <input
+                name="noteColour"
+                type="radio"
+                class={colour}
+                bind:group={noteColour}
+                value={colour} />
+            </li>
+          {/each}
+        </ul>
+
       <div class="NewForm">
         <span>Select Source: </span>
         <select name="source" on:change={changeSource} id="select-source" value=''>
@@ -604,22 +622,31 @@
           {/each}
         </select>
       </div>
+
       <div class="NewForm">
-      <span>Add Notebooks: </span>
-      <select name="notebooks" on:change={changeNotebook} id="select-notebooks" value=''>
+        <span>Add Notebooks: </span>
+        <select name="notebooks" on:change={changeNotebook} id="select-notebooks" value=''>
         {#each notebooksList as notebook}
           <option value={notebook.name}>{notebook.name}</option>
         {/each}
-      </select>
-      <br/>
-    </div>
-    <div>
-      <label>Pages: </label><input class="page-input" type="text" bind:value={pageNumber} />
-    </div>
-  </div>
+        </select>
+        <br/>
+      </div>
+      {#if itemState === 'new'}
+      <div>
+        <label>Pages: </label>
+        <input 
+          class="page-input" 
+          type="text" bind:value={pageNumber} />
+      </div>
+      {/if}
+</div>
+
+      {#if itemState === "new"}
       <div class="Editor {error ? "error" : noteColour}">
         <NoteEditor bind:richtext={text} />
       </div>
+
       <ul class="flags {error ? "error" : noteColour}">
         {#each flagsArr as flag}
           <li>
@@ -631,48 +658,55 @@
           </li>
         {/each}
       </ul>
+
       {#if error}
-      <div class="error-message">note cannot be empty</div>
+        <div class="error-message">note cannot be empty</div>
       {/if}
-      {#if selectedSource}
-      Source: 
-      <span class="Flag Item">
-        <IcoNotebook />
-        <span>{selectedSource.name}</span>
-        <CloseIcon
-          click={() => {
-            selectedSource = null;
-          }} />
-      </span>
-
       {/if}
-
-      {#if selectedNotebooks}
-      {#each selectedNotebooks as notebook}
+      {#if $selectedSource}
+        Source: 
         <span class="Flag Item">
           <IcoNotebook />
-          <span class={notebook.name}>{notebook.name}</span>
+          <span>{$selectedSource.name}</span>
           <CloseIcon
             click={() => {
-              initialNotebook = false;
-              const index = selectedNotebooks.indexOf(notebook);
-              if (index !== -1) {
-                selectedNotebooks = selectedNotebooks.filter((old) => {
-                  return old !== notebook;
-                });
-              }
+              $selectedSource = null;
             }} />
         </span>
-      {/each}
       {/if}
 
-
+      {#if $selectedNotebooks}
+        {#each $selectedNotebooks as notebook}
+          <span class="Flag Item">
+            <IcoNotebook />
+            <span class={notebook.name}>{notebook.name}</span>
+            <CloseIcon
+              click={() => {
+                initialNotebook = false;
+                const index = $selectedNotebooks.indexOf(notebook);
+                if (index !== -1) {
+                  $selectedNotebooks = $selectedNotebooks.filter((old) => {
+                    return old !== notebook;
+                  });
+              }
+            }} />
+          </span>
+        {/each}
+      {/if}
+      {#if itemState === 'new'}
 
       <WhiteButton>Create</WhiteButton>
       <Closer click={close} dark={true} />
+      {:else}
+      <FileInput notesImport=true close={close} ntbkClose={ntbkClose} {noteColour} />
+
+      {/if}
     </form>
-  </div>
-  <span />
+    <span />
+
+
+
+    </div>
 {:else}
   <span class="new-button" bind:this={newToggle}>
     <Button {click}>

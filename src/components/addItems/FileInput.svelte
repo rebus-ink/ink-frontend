@@ -1,9 +1,18 @@
 <script>
   import { getToken } from "../../getToken";
+  import Button from "../widgets/Button.svelte"
+  import {refreshNotes, refreshInNote, selectedNotebooks, selectedSource, tags} from "../../stores"
   export let name;
   export let placeholder = "";
   export let dark = false;
-  let file;
+  export let notesImport = false;
+  export let close = () => {};
+  export let ntbkClose = () => {};
+  export let noteColour;
+
+  import { stores } from "@sapper/app";
+  const { page } = stores();
+
   let url;
   let publication;
   let type;
@@ -13,15 +22,72 @@
   let storageId;
   let original;
   let fileName;
+  let file;
+  let atNotebook;
+  $: atNotebook =
+    $page.path && $page.path.startsWith("/notebooks/") ? true : false;
 
   let supportedTypes = ["application/epub+zip", "application/pdf", "image/jpeg", 
     "image/png", "image/gif", "audio/mpeg"];
 
   let error = false;
 
+  async function uploadNotes() {
+
+
+    if ($selectedSource || 
+    ($selectedNotebooks && $selectedNotebooks.length) || noteColour) {
+
+      let body = {};
+      if ($selectedNotebooks && $selectedNotebooks.length) {
+        body.notebooks = $selectedNotebooks;
+      }
+      if ($selectedSource) {
+        body.sourceId = $selectedSource.shortId;
+      }
+
+      if (noteColour) {
+        body.tags = $tags.getIds([noteColour]);
+      }
+
+      await fetch("/api/notes", {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "csrf-token": getToken(),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+    }
+
+    await fetch("/api/notes", {
+      method: "PUT",
+      credentials: "include",
+      mode: "cors",
+        headers: { 
+          "csrf-token": getToken(),
+          "Content-Type": file.type,
+          "Content-Disposition": `attachment; filename="${fileName}"`,
+        },
+        body: file,
+    });
+
+
+    if ($page.path === "/") $refreshInNote = Date.now();
+      else if (atNotebook) ntbkClose();
+      else $refreshNotes = Date.now();
+
+      await close()
+
+
+  }
+
   async function change(event) {
     file = event.target.files[0];
     fileName = file.name;
+    if (!notesImport) {
 
     if (supportedTypes.indexOf(file.type) === -1) {
       error = true;
@@ -65,6 +131,7 @@
       failed = true;
     }
     }
+  }
 
   }
 </script>
@@ -213,6 +280,10 @@ Upload URL endpoint should take content type as a parameter and return a {public
       class="visually-hidden"
       on:change={change} />
   </label>
+
+  {#if notesImport}
+  <Button click={uploadNotes} disabled={!file} light={true}>Upload Notes</Button>
+  {/if}
   {#if error}
   <span class="error-message">file format not supported</span>
   {/if}

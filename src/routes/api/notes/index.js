@@ -1,7 +1,56 @@
 import got from "got";
+import mammoth from "mammoth";
+let notebooks, sourceId, tags;
+
+
+// Patch is used to send the notebooks, source or any other information
+// that is not in the docx file
+export const patch = async function patch(req,res,next) {
+  console.log('patch body', req.body)
+  notebooks = req.body.notebooks;
+  sourceId = req.body.sourceId;
+  tags = req.body.tags
+
+  res.json({})
+
+}
+
+// PUT receives the file and uses it to create notes in the API
+
+export const put = async function put(req,res,next) {
+
+  const text = await (await mammoth.convertToHtml({buffer: req.body})).value;
+
+  const notes = text.split('*****')
+ 
+  notes.forEach(async note => {
+
+    let body = {"body": [{"content": note, "motivation": "commenting"}]}
+
+    if (sourceId) body.sourceId = sourceId;
+    if (notebooks) body.notebooks = notebooks;
+    console.log(tags[0])
+    if (tags) body.tags = tags.map(tag => {
+      return {id: tag}
+    });
+console.log('body?', body)
+    await got
+    .post(`${process.env.API_SERVER}notes`, {
+      headers: {
+        "content-type": "application/ld+json",
+        Authorization: `Bearer ${req.user.token}`,
+      },
+      json: body,
+    })
+    .json();
+  })
+
+  res.json({})
+
+}
 
 export const post = async function post(req, res, next) {
-  if (!req.user || !req.user.profile) return res.sendStatus(401);
+  if (!req.user || !req.user.profile) return res.sendStatus(401);  
   const collection = req.body._collection;
   const tags = req.body._tags;
   delete req.body.collection;
@@ -40,7 +89,6 @@ export const post = async function post(req, res, next) {
       }
       return res.json(response);
     } catch (err) {
-      console.error(err);
       res.status(err.response.statusCode);
       return res.json(JSON.parse(err.response.body));
     }

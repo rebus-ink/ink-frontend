@@ -90,21 +90,13 @@
     "passport-auth0": "^1.4.2",
     "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
-<<<<<<< HEAD
     "postcss": "^8.4.12",
-=======
-    "postcss": "^7.0.39",
->>>>>>> 32b5763 (export notes)
     "postcss-calc": "^7.0.3",
     "postcss-easy-import": "^3.0.0",
     "postcss-reporter": "^7.0.5",
     "qsa-observer": "^2.0.2",
     "quill": "^1.3.7",
-<<<<<<< HEAD
     "redis": "^4.0.4",
-=======
-    "redis": "^4.0.6",
->>>>>>> 32b5763 (export notes)
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^6.6.3",
     "sharp": "^0.30.3",
