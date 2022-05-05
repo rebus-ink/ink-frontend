@@ -87,6 +87,9 @@
   async function change(event) {
     file = event.target.files[0];
     fileName = file.name;
+
+
+
     if (!notesImport) {
 
     if (supportedTypes.indexOf(file.type) === -1) {
@@ -130,6 +133,14 @@
       done = false;
       failed = true;
     }
+    }
+  } else {
+
+    console.log(file)
+    if (file.name.toLowerCase().endsWith('.docx')) {
+      error = false;
+    } else {
+      error = true;
     }
   }
 

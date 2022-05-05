@@ -698,6 +698,12 @@
       <WhiteButton>Create</WhiteButton>
       <Closer click={close} dark={true} />
       {:else}
+      <p>
+        Import notes from a docx document. <br/>
+        Notes should be separated with ***** <br/>
+        For notes with highlights, The highlight should be preceded with "HIGHLIGHT:"
+        and associated note (optional) with "NOTE:"
+      </p>
       <FileInput notesImport=true close={close} ntbkClose={ntbkClose} {noteColour} />
 
       {/if}
