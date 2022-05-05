@@ -1,3 +1,5 @@
+1.0.0 - May 2022
+
 Deployment Dec 13, 2021
 - Multimedia support (photo and audio uploads, video links)
 - Enforce file type in uploads in create source forms
