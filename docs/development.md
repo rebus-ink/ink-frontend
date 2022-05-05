@@ -72,3 +72,13 @@ Or to watch:
 | `deploy-production`   | deploys the app to production                                                                                  |
 | `save-config`         | saves the app.yaml config file from env, used by the GitHub Action for automatic deployments                   |
 | `save-keyfile`        | saves the keyfile from env, necessary if hosting outside of the Google Cloud Platform                          |
+
+## Versioning
+
+The project uses semantic versioning
+Major.Minor.Patch
+Major: major or breaking changes to the frontend interface
+Minor: New features and added functionality
+Patch: Small changes to features and bug fixes
+
+Version number was set to 1.0.0 on May 5, 2022
