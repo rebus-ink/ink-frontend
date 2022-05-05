@@ -22,14 +22,38 @@ export const put = async function put(req,res,next) {
   const text = await (await mammoth.convertToHtml({buffer: req.body})).value;
 
   const notes = text.split('*****')
+
+  const highlightDivider = "HIGHLIGHT:"
+  const noteDivider = "NOTE:"
+  let body;
  
   notes.forEach(async note => {
 
-    let body = {"body": [{"content": note, "motivation": "commenting"}]}
+    if (note.includes(highlightDivider)) {
+      let highlightIndex = note.indexOf(highlightDivider)
+      let highlight, annotation;
+
+      // with note too
+      if (note.includes("NOTE:")) {
+        let noteIndex = note.indexOf("NOTE:")
+        if (highlightIndex < noteIndex) {
+          highlight = note.substring(highlightIndex + highlightDivider.length, noteIndex)
+          annotation = note.substring(noteIndex + noteDivider.length)
+        } else {
+          highlight = note.substring(highlightIndex + highlightDivider.length);
+          annotation = note.substring(noteIndex + noteDivider.length, highlightIndex);
+        }
+      }
+      body = {"body": [{"content": highlight, "motivation": "highlighting"}]}
+      if (note) {
+        body.body.push({"content": annotation, "motivation": "commenting"})
+      }
+    } else {
+      body = {"body": [{"content": note, "motivation": "commenting"}]}
+    }
 
     if (sourceId) body.sourceId = sourceId;
     if (notebooks) body.notebooks = notebooks;
-    console.log(tags[0])
     if (tags) body.tags = tags.map(tag => {
       return {id: tag}
     });

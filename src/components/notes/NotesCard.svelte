@@ -449,11 +449,15 @@
         <div class="column" />
         <div class="info">
           {#if highlighed}
+            {#if note && note.target && note.target.source}
             <a
               class="Highlight {noted && noted.content ? '' : 'noNote'}"
               href={`/target${note.target.source}`}>
               <p>{note.target.selector.exact}</p>
             </a>
+            {:else} 
+            <p class="Highlight">{highlighed.content}</p>
+            {/if}
           {/if}
           {#if note.source && note.source.name}
             <a href={`/sources/${note.source.shortId}`} class="Source">
