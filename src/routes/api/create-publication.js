@@ -13,6 +13,7 @@ export async function post(req, res, next) {
       };
     });
   }
+  if (req.body.type === "Publication") req.body.type = "Source"
   const type = req.body.pubType || req.body.type || "Source";
   let links;
   if (req.body.newURL) {
