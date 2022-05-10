@@ -1,3 +1,6 @@
+1.1.1 - May 10, 2022
+
+- fixed bug on create source (was trying to create with type 'Publication' for reasons I do not fully understand)
 
 1.1.0 - May 2022
 
