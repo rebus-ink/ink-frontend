@@ -596,7 +596,6 @@
     <form
       id="newform"
       class="newForm"
-      action="/api/create-publication"
       on:submit={submit}>
 
       <div class="options">
