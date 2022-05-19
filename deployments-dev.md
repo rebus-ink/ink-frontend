@@ -1,9 +1,14 @@
-1.1.1 - May 10, 2022
 
+May 12, 2022
+Feature:
+- CI with github actions
+
+May 11, 2022
+Bug fixes:
 - fixed bug on create source (was trying to create with type 'Publication' for reasons I do not fully understand)
 
-1.1.0 - May 2022
-
+May, 2022
+Features:
 - import notes from docx
 - export notes to docx
 - upgrade to node 14, upgrade most dependencies

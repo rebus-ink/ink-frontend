@@ -1,0 +1,52 @@
+name: CI
+
+on: 
+  push:
+    branches: [dev, main]
+  pull_request:
+    branches: [dev, main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v3
+      with: 
+        ssh-key: ${{ secrets.SSH_KEY }}
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+      env: {
+        GOOGLE_CLOUD_PROJECT: thematic-cider-139815
+      }
+    - name: npm install
+      run: npm ci
+    - name: npm test
+      run: npm run test
+    
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Vankka/pr-target-branch-action@v2
+        with:
+          target: main
+          exclude: dev
+
+  # dependency-review:
+  #   name: npm audit
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: install dependencies
+  #       run: npm ci
+  #     - uses: oke-py/npm-audit-action@v2
+  #       with:
+  #         audit_level: critical
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+
+
+          
