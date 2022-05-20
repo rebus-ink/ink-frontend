@@ -1,7 +1,7 @@
 <script>
   import { getToken } from "../../getToken";
   import Button from "../widgets/Button.svelte"
-  import {refreshNotes, refreshInNote, selectedNotebooks, selectedSource, tags} from "../../stores"
+  import {refreshNotes, refreshSourceNotes, refreshInNote, selectedNotebooks, selectedSource, tags} from "../../stores"
   export let name;
   export let placeholder = "";
   export let dark = false;
@@ -9,6 +9,7 @@
   export let close = () => {};
   export let ntbkClose = () => {};
   export let noteColour;
+  export let source;
 
   import { stores } from "@sapper/app";
   const { page } = stores();
@@ -46,6 +47,10 @@
         body.sourceId = $selectedSource.shortId;
       }
 
+      if (source) {
+        body.sourceId = source.shortId;
+      }
+
       if (noteColour) {
         body.tags = $tags.getIds([noteColour]);
       }
@@ -77,7 +82,10 @@
 
     if ($page.path === "/") $refreshInNote = Date.now();
       else if (atNotebook) ntbkClose();
-      else $refreshNotes = Date.now();
+      else {
+        $refreshNotes = Date.now();
+        $refreshSourceNotes = Date.now();
+      }
 
       await close()
 
