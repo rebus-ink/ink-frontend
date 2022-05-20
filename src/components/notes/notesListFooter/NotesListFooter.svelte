@@ -168,13 +168,13 @@
       });
 
       let server
-      console.log($page.host)
       if ($page && $page.host === 'app.rebus.ink' ) {
         server = "https://ink-api-dev-dot-thematic-cider-139815.appspot.com/" 
+      } else if ($page && $page.host === 'localhost:3000') {
+        server = 'http://localhost:3000'
       } else {
         server = 'https://ink-server-dev-dot-thematic-cider-139815.appspot.com' 
       }
-      server = 'http://localhost:3000'
 
       const url = `${server}/export/notes`;
       window.location.replace(url);
