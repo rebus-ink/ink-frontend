@@ -1,3 +1,5 @@
+May 20, 2022
+- fixes to notes import / export
 
 May 12, 2022
 Feature:
