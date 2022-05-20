@@ -24,6 +24,8 @@
     profileSources, library, selectedNotebooks, 
     selectedSource } from "../../stores";
   import { stores } from "@sapper/app";
+  import _ from "lodash";
+import { uniqueId } from "docx";
 
   const { page } = stores();
   export let note = { body: [], source: { name: "" } };
@@ -48,6 +50,7 @@
   $: if (sources && sources.length && sources[0].name) {
     sources.unshift({name: ""})
   }
+  $: console.log('selectedNotebooks', $selectedNotebooks)
 
   function assignIco(icon) {
     switch (icon) {
@@ -75,12 +78,16 @@
   let open = false;
   let newToggle;
   let noteColour = "colour1";
-
   // if in a notebook, set that notebook by default, but make sure it can be removed
   let initialNotebook = true;
   $: if (atNotebook && notebooksList && notebooksList.length && initialNotebook) {
+
     const notebook = notebooksList.find(x => x.shortId === $page.params.id)
-    $selectedNotebooks.push(notebook)
+    if (notebook) $selectedNotebooks.push(notebook)
+    // remove duplicates
+    $selectedNotebooks = _.uniqBy($selectedNotebooks, (e) => {
+      return e.id
+    })
   }
 
   function click() {
@@ -674,7 +681,8 @@
         </span>
       {/if}
 
-      {#if $selectedNotebooks}
+      {#if $selectedNotebooks && $selectedNotebooks.length}
+      
         {#each $selectedNotebooks as notebook}
           <span class="Flag Item">
             <IcoNotebook />
@@ -704,6 +712,7 @@
         and associated note (optional) with "NOTE:"
       </p>
       <FileInput notesImport=true close={close} ntbkClose={ntbkClose} {noteColour} />
+      <Closer click={close} dark={true} />
 
       {/if}
     </form>
