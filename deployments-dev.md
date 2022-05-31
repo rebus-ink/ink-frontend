@@ -1,9 +1,9 @@
 May 31, 2022
 - Upgrade npm 6.14.17 => 8.11.0
+- Resolve failing CI, forces packages hosted on GitHub to use HTTPS
 
 May 20, 2022
 - fixes to notes import / export
-
 
 May 12, 2022
 Feature:
