@@ -2,9 +2,15 @@
 
 ## Prerequisites
 
-* Node.js (specified by `engines.node` in `package.json`)
+* Docker
 
-## Setup
+## Introduction
+
+As the development environment is hosted in a Docker container, you must execute all commands
+in the context of the running container, either by (a) prefixing the commands with
+`docker compose exec nodejs` or (b) by "shelling" into the container `docker compose exec nodejs bash`.
+
+## Configuration
 
 The front-end can run against a local or hosted instance of the API server (recommended if
 contributing the front-end only). To setup the front-end service for local development, clone this
@@ -14,8 +20,10 @@ member):
 1. Google Service Account Key: `keyfile.json`
 2. Environment Variables: `.env`. Update `GOOGLE_APPLICATION_CREDENTIALS` to point to the correct path.
 
-Install the Node modules:
+## Install
 
+    $ docker compose up -d
+    $ docker compose exec nodejs bash
     $ npm install
 
 ## Running the server
