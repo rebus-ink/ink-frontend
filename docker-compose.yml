@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    image: node:14.19.3-bullseye
+    container_name: nodejs
+    env_file: .env
+    ports:
+      - "3000:3000"
+    tty: true
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+
+volumes:
+  node_modules:
