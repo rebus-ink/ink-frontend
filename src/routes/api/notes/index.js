@@ -1,6 +1,6 @@
 import got from "got";
 import mammoth from "mammoth";
-let notebooks, sourceId, tags;
+let notebooks, sourceId, tags, skipDuplicates;
 
 
 // Patch is used to send the notebooks, source or any other information
@@ -10,7 +10,7 @@ export const patch = async function patch(req,res,next) {
   notebooks = req.body.notebooks;
   sourceId = req.body.sourceId;
   tags = req.body.tags
-
+  skipDuplicates = req.body.skipDuplicates;
   res.json({})
 
 }
@@ -57,17 +57,24 @@ export const put = async function put(req,res,next) {
     if (tags) body.tags = tags.map(tag => {
       return {id: tag}
     });
-console.log('body?', body)
+
+    let url;
+    if (skipDuplicates) {
+      url = `${process.env.API_SERVER}notes?skipDuplicates=true`
+    } else {
+      url = `${process.env.API_SERVER}notes`
+    }
+
     await got
-    .post(`${process.env.API_SERVER}notes`, {
-      headers: {
-        "content-type": "application/ld+json",
-        Authorization: `Bearer ${req.user.token}`,
-      },
-      json: body,
+      .post(url, {
+        headers: {
+          "content-type": "application/ld+json",
+          Authorization: `Bearer ${req.user.token}`,
+        },
+        json: body,
+      })
+      .json();
     })
-    .json();
-  })
 
   res.json({})
 

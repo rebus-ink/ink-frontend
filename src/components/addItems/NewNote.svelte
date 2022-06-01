@@ -50,7 +50,6 @@ import { uniqueId } from "docx";
   $: if (sources && sources.length && sources[0].name) {
     sources.unshift({name: ""})
   }
-  $: console.log('selectedNotebooks', $selectedNotebooks)
 
   function assignIco(icon) {
     switch (icon) {
