@@ -25,8 +25,6 @@
   export let type;
   export let fullList;
 
-  $: console.log('page???', $page)
-
 
   let editing = false;
   let colour;
