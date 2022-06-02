@@ -72,10 +72,10 @@ const {
               children.push(
                 new Paragraph({
                   children: extractChildren(paragraph.sections, fontSize),
-                //   indent: {
-                //     left: 300,
-                //     right: 300
-                //   }
+                  indent: {
+                    left: 300,
+                    right: 300
+                  }
                 })
               )
               children.push(new Paragraph({text: ''}))

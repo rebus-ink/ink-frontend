@@ -34,8 +34,6 @@
 
   let error = false;
 
-  $: console.log('skip?', skipDuplicates)
-
   async function uploadNotes() {
 
     if ($selectedSource || 
@@ -85,10 +83,12 @@
         body: file,
     });
 
-
-    if ($page.path === "/") $refreshInNote = Date.now();
-      else if (atNotebook) ntbkClose();
-      else {
+console.log('??????', $page.path, atNotebook)
+    if ($page.path === "/") {
+      $refreshInNote = Date.now();
+    } else if (atNotebook) {
+      ntbkClose();
+    }  else {
         $refreshNotes = Date.now();
         $refreshSourceNotes = Date.now();
       }

@@ -167,7 +167,6 @@
 
       $selectedNotebooks = [];
       $selectedSource = null;
-
       if ($page.path === "/") $refreshInNote = Date.now();
       else if (atNotebook) ntbkClose();
       else $refreshNotes = Date.now();
