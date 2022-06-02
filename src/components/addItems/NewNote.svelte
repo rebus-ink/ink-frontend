@@ -25,7 +25,7 @@
     selectedSource } from "../../stores";
   import { stores } from "@sapper/app";
   import _ from "lodash";
-import { uniqueId } from "docx";
+  import {goto} from "@sapper/app"
 
   const { page } = stores();
   export let note = { body: [], source: { name: "" } };
@@ -107,6 +107,9 @@ import { uniqueId } from "docx";
       $selectedNotebooks = [];
       $selectedSource = null;
     }
+    if ($page) {
+        goto($page.path)
+      }
 
   }
   let text;
