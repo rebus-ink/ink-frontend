@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile
-    image: node:14.19.3-bullseye
     container_name: ink-frontend
     env_file: .env
     ports:
