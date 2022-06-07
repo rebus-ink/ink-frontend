@@ -1,5 +1,5 @@
 <script>
-  import { addSelected, removeSelected } from "../../stores";
+  import { addSelectedSource, removeSelectedSource } from "../../stores";
   import ItemStacks from "./ItemStacks.svelte";
   export let item = {};
   export let selecting;
@@ -8,9 +8,9 @@
     selected = false;
   }
   $: if (selected && item.id) {
-    addSelected(item);
+    addSelectedSource(item);
   } else {
-    removeSelected(item);
+    removeSelectedSource(item);
   }
   let cover = {};
   $: if (item.resources) {
@@ -36,7 +36,6 @@
       if (tag.type === "stack") return tag;
     });
   }
-  $: console.log(stacks)
 </script>
 
 <style>

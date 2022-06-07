@@ -26,7 +26,7 @@
     clearSelected();
   }
 
-  clearSelected();
+  //clearSelected();
 
   let selectAll = false;
   let chooseAll = () => {

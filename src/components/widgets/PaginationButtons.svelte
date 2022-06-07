@@ -32,7 +32,7 @@
     display: grid;
     gap: 70px;
     justify-content: center;
-    padding-bottom: calc(var(--base) * 2);
+    padding-bottom: 150px;
     grid-template-columns: repeat(5, max-content);
   }
   .Pagination button {
