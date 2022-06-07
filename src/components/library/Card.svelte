@@ -2,31 +2,55 @@
   import ItemStacks from "./ItemStacks.svelte";
   import IcoNotebook from "../img/IcoNotebook.svelte"
   import {
-    addSelected,
-    removeSelected,
+    addSelectedSource,
+    removeSelectedSource,
     page,
-    selectedItems,
+    selectedSources,
     defaultNotebook,
     refreshNotebooks,
-    notebooks
+    notebooks,
+    selectedItems,
+    addSelected,
+    removeSelected
   } from "../../stores";
 
   export let item = {};
   export let selecting;
   export let selection = function() {};
   export let selectAll;
+  export let inNotebook = false;
+
   let selected = false;
+  if($selectedSources && !inNotebook) {
+    $selectedSources.forEach(source => {
+      if (source.id === item.id) selected = true;
+    })
+  }
+  if($selectedItems && inNotebook) {
+    $selectedItems.forEach(source => {
+      if (source.id === item.id) selected = true;
+    })
+  }
 
   $refreshNotebooks = Date.now()
 
   $: if (!selecting && selected) {
     selected = false;
   }
-  $: if (selected && item.id) {
-    addSelected(item);
+  $: if (!inNotebook) {
+    if (selected && item.id) {
+      addSelectedSource(item);
+    } else {
+      removeSelectedSource(item);
+    }
   } else {
-    removeSelected(item);
+    if (selected && item.id) {
+      addSelected(item);
+    } else {
+      removeSelected(item);
+    }
   }
+ 
   let cover;
   $: if (item.resources) {
     cover = item.resources.find(
@@ -58,8 +82,8 @@
   }
 
   let selectable = true;
-  $: if ($selectedItems.size || $page.path === "/") {
-    $selectedItems.forEach((obj) => {
+  $: if ($selectedSources.size || $page.path === "/") {
+    $selectedSources.forEach((obj) => {
       selectable =
         !obj.noteContexts &&
         ($page.path === "/library/all/all" ||

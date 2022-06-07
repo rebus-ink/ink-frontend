@@ -49,3 +49,37 @@ export function removeSelected(item) {
 export function clearSelected() {
   selectedItems.set(new Set());
 }
+
+export const selectedNotes = writable(new Set());
+
+export function addSelectedNote(item) {
+  selectedNotes.update(set => {
+    return set.add(item);
+  });
+}
+export function removeSelectedNote(item) {
+  selectedNotes.update(set => {
+    set.delete(item);
+    return set;
+  });
+}
+export function clearSelectedNotes() {
+  selectedNotes.set(new Set());
+}
+
+export const selectedSources = writable(new Set());
+
+export function addSelectedSource(item) {
+  selectedSources.update(set => {
+    return set.add(item);
+  });
+}
+export function removeSelectedSource(item) {
+  selectedSources.update(set => {
+    set.delete(item);
+    return set;
+  });
+}
+export function clearSelectedSources() {
+  selectedSources.set(new Set());
+}
