@@ -7,6 +7,6 @@ FROM ${BUILDER_IMAGE}
 
 WORKDIR /app
 
-RUN npm install npm@8.11.0 --location=global
+RUN npm install -g npm@8.11.0
 
 CMD ["/bin/bash"]
