@@ -23,7 +23,7 @@ member):
 ## Install
 
     $ docker compose up -d
-    $ docker compose exec nodejs bash
+    $ docker compose exec frontend bash
     $ npm install
 
 ## Running the server
