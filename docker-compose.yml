@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  nodejs:
+  frontend:
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile
     image: node:14.19.3-bullseye
-    container_name: nodejs
+    container_name: ink-frontend
     env_file: .env
     ports:
       - "3000:3000"
