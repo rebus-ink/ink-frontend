@@ -4,6 +4,7 @@ June 7, 2022
 
 May 31, 2022
 - Upgrade npm 6.14.17 => 8.11.0
+- Add docker for development
 
 May 20, 2022
 - fixes to notes import / export
