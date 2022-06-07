@@ -1,5 +1,5 @@
 <script>
-  import { library, selectedItems, clearSelected } from "../../stores";
+  import { library, selectedSources, clearSelectedSources } from "../../stores";
   import NotesListFooter from "../notes/notesListFooter/NotesListFooter.svelte";
   import FilterSource from "../widgets/FilterSource.svelte";
   import Card from "./Card.svelte";
@@ -31,19 +31,19 @@
     clicked = true;
   };
 
-  clearSelected();
+  //clearSelected();
 
   $: selectable =
     $page.path === "/library/all/all" || $page.path === "/library/all/all/"
       ? true
       : false;
-  $: if (!selectable) clearSelected();
+  $: if (!selectable) clearSelectedSources();
 
   let selectAll = false;
   let chooseAll = () => {
-    if ($selectedItems.size !== items.length) selectAll = true;
+    if ($selectedSources.size !== items.length) selectAll = true;
   };
-  $: fullList = $selectedItems.size == items.length ? true : false;
+  $: fullList = $selectedSources.size == items.length ? true : false;
 </script>
 
 <style>
@@ -231,14 +231,14 @@
     {/each}
   {/if}
 </div>
-{#if selecting && $selectedItems.size && selectable}
+{#if selecting && $selectedSources.size && selectable}
   <NotesListFooter
     type="source"
     {chooseAll}
     {fullList}
     endSelection={() => {
       selecting = false;
-      clearSelected();
+      clearSelectedSources();
     }} />
 {/if}
 {#if items && items.length}

@@ -25,7 +25,7 @@
     selectedSource } from "../../stores";
   import { stores } from "@sapper/app";
   import _ from "lodash";
-import { uniqueId } from "docx";
+  import {goto} from "@sapper/app"
 
   const { page } = stores();
   export let note = { body: [], source: { name: "" } };
@@ -50,7 +50,6 @@ import { uniqueId } from "docx";
   $: if (sources && sources.length && sources[0].name) {
     sources.unshift({name: ""})
   }
-  $: console.log('selectedNotebooks', $selectedNotebooks)
 
   function assignIco(icon) {
     switch (icon) {
@@ -108,6 +107,9 @@ import { uniqueId } from "docx";
       $selectedNotebooks = [];
       $selectedSource = null;
     }
+    if ($page) {
+        goto($page.path)
+      }
 
   }
   let text;
@@ -165,7 +167,6 @@ import { uniqueId } from "docx";
 
       $selectedNotebooks = [];
       $selectedSource = null;
-
       if ($page.path === "/") $refreshInNote = Date.now();
       else if (atNotebook) ntbkClose();
       else $refreshNotes = Date.now();

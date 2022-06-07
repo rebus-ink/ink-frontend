@@ -25,6 +25,7 @@
   let fileName;
   let file;
   let atNotebook;
+  let skipDuplicates = false;
   $: atNotebook =
     $page.path && $page.path.startsWith("/notebooks/") ? true : false;
 
@@ -35,9 +36,8 @@
 
   async function uploadNotes() {
 
-
     if ($selectedSource || 
-    ($selectedNotebooks && $selectedNotebooks.length) || noteColour) {
+    ($selectedNotebooks && $selectedNotebooks.length) || noteColour || skipDuplicates) {
 
       let body = {};
       if ($selectedNotebooks && $selectedNotebooks.length) {
@@ -53,6 +53,10 @@
 
       if (noteColour) {
         body.tags = $tags.getIds([noteColour]);
+      }
+
+      if (skipDuplicates) {
+        body.skipDuplicates = skipDuplicates
       }
 
       await fetch("/api/notes", {
@@ -79,10 +83,12 @@
         body: file,
     });
 
-
-    if ($page.path === "/") $refreshInNote = Date.now();
-      else if (atNotebook) ntbkClose();
-      else {
+console.log('??????', $page.path, atNotebook)
+    if ($page.path === "/") {
+      $refreshInNote = Date.now();
+    } else if (atNotebook) {
+      ntbkClose();
+    }  else {
         $refreshNotes = Date.now();
         $refreshSourceNotes = Date.now();
       }
@@ -152,6 +158,10 @@
     }
   }
 
+  }
+
+  function toggleDuplicates() {
+    skipDuplicates = !skipDuplicates
   }
 </script>
 
@@ -288,6 +298,13 @@ Upload URL endpoint should take content type as a parameter and return a {public
   {#if original}
     <input type="hidden" name="uploadURL" value={original} />
   {/if}
+
+  Skip Duplicates <input 
+  type="checkbox"
+  value={skipDuplicates}
+  on:change={toggleDuplicates}
+  label="Skip Duplicates" />
+
   <label class="input" class:done class:failed class:working class:error>
     {#if file}{file.name}{:else}Upload a file{/if}
     <input
@@ -301,6 +318,7 @@ Upload URL endpoint should take content type as a parameter and return a {public
   </label>
 
   {#if notesImport}
+
   <Button click={uploadNotes} disabled={!file} light={true}>Upload Notes</Button>
   {/if}
   {#if error}

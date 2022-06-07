@@ -1,7 +1,7 @@
 <script>
 
   import {
-    selectedItems,
+    selectedSources,
     refreshDate,
     addedCollections,
     addedNotebooks,
@@ -26,7 +26,7 @@
     const body = Object.fromEntries(
       new URLSearchParams(new FormData(target)).entries()
     );
-    body.items = Array.from($selectedItems);
+    body.items = Array.from($selectedSources);
     body.addedCollections = $addedCollections;
     body.addedNotebooks = $addedNotebooks;
     $addedCollections = [];
@@ -72,7 +72,7 @@
     }
   }*/
 
-  $: editSource = Array.from($selectedItems);
+  $: editSource = Array.from($selectedSources);
   let removeTag = [];
   let removeNotebooks = [];
   let test = async (id) => {

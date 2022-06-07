@@ -12,17 +12,31 @@
   import IcoNotebook from "../img/IcoNotebook.svelte"
   import {
     page,
-    addSelected,
-    removeSelected,
+    addSelectedNote,
+    removeSelectedNote,
+    selectedNotes,
     selectedItems,
+    addSelected,
+    removeSelected
   } from "../../stores";
   export let selecting;
   export let selection = function() {};
   export let note = {};
   export let selectAll;
+  export let inNotebook = false;
+
   let selectable = true;
   let selected = false;
-
+  if($selectedNotes && !inNotebook) {
+    $selectedNotes.forEach(item => {
+      if (note.id === item.id) selected = true;
+    })
+  }
+  if($selectedItems && inNotebook) {
+    $selectedItems.forEach(item => {
+      if (note.id === item.id) selected = true;
+    })
+  }
   let noted, highlighed;
   $: if (note && note.body && note.body[0]) {
     noted = note.body.find((item) => item.motivation === "commenting");
@@ -76,8 +90,13 @@
       : "";
 
   $: if (!selecting && selected) selected = false;
-  $: if (selected && note.id) addSelected(note);
-  else removeSelected(note);
+  $: if (!inNotebook) {
+    if (selected && note.id) addSelectedNote(note);
+    else removeSelectedNote(note);
+  } else {
+    if (selected && note.id) addSelected(note);
+    else removeSelected(note);
+  }
 
   $: if (selectAll) {
     selected = true;
@@ -85,8 +104,8 @@
   }
 
   
-  $: if ($selectedItems.size) {
-    $selectedItems.forEach((obj) => {
+  $: if ($selectedNotes.size) {
+    $selectedNotes.forEach((obj) => {
       selectable =
         !obj.noteContexts &&
         ($page.path === "/notes/all/all" ||

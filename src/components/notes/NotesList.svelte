@@ -1,5 +1,5 @@
 <script>
-  import { notes, clearSelected, selectedItems } from "../../stores";
+  import { notes, clearSelected, clearSelectedNotes, selectedNotes } from "../../stores";
   import NotesCard from "./NotesCard.svelte";
   import SortSelect from "../library/SortSelect.svelte";
   import NoNotes from "../img/NoNotes.svelte";
@@ -34,15 +34,15 @@
     $page.path === "/notes/all/all" || $page.path === "/notes/all/all/"
       ? true
       : false;
-  $: if (!selectable) clearSelected();
+  $: if (!selectable) clearSelectedNotes();
 
-  clearSelected();
+  clearSelectedNotes();
 
   let selectAll = false;
   let chooseAll = () => {
-    if ($selectedItems.size !== items.length) selectAll = true;
+    if ($selectedNotes.size !== items.length) selectAll = true;
   };
-  $: fullList = $selectedItems.size == items.length ? true : false;
+  $: fullList = $selectedNotes.size == items.length ? true : false;
 </script>
 
 <style>
@@ -238,14 +238,14 @@
     {/each}
   {/if}
 </div>
-{#if selecting && $selectedItems.size && selectable}
+{#if selecting && $selectedNotes.size && selectable}
   <NotesListFooter
     type="note"
     {chooseAll}
     {fullList}
     endSelection={() => {
       selecting = false;
-      clearSelected();
+      clearSelectedNotes();
     }} />
 {/if}
 {#if !$page.params.id && items && items.length}

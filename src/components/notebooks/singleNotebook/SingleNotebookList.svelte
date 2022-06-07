@@ -24,7 +24,6 @@
   let clicked = false;
   let Items;
   let menuTabs = "all";
-
   $: if (notebook && notebook.type !== "loading") {
     if (menuTabs === "all") {
       Items = []
@@ -70,6 +69,8 @@
   } else {
     typeOfItem = false;
   }
+  $: console.log($selectedItems.size)
+  $: console.log('typeOfItem', typeOfItem)
 </script>
 
 <style>
@@ -331,9 +332,10 @@
     {#if Items[0]}
       {#each Items as item}
         {#if item.body}
-          <NotesCard note={item} {selecting} {selection} selectAll={false} />
+          <NotesCard note={item} {selecting} {selection} 
+          inNotebook={true} selectAll={false} />
         {:else if item.author}
-          <Card {item} {selecting} {selection} selectAll={false} />
+          <Card {item} {selecting} {selection} inNotebook={true} selectAll={false} />
         {:else if item.notebookId}
           <PageCard {item} {selecting} {selection} />
         {/if}

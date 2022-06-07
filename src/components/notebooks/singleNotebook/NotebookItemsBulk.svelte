@@ -1,6 +1,7 @@
 <script>
   import IcoRemove from "../../img/IcoRemove.svelte";
   import IcoDelete from "../../img/IcoDelete.svelte";
+  import IcoExport from "../../img/IcoExport.svelte"
   import DeletionModal from "../../widgets/DeletionModal.svelte";
   import RemoveItemsModal from "./RemoveItemsModal.svelte";
   import { goto } from "@sapper/app";
@@ -10,6 +11,14 @@
   export let endSelection = function() {};
   export let notebook;
   export let typeOfItem;
+
+  let exportActive = true;
+  $: if ($selectedItems && onlyNotesSelected()) {
+    exportActive = true;
+  } else {
+    exportActive = false;
+  }
+
 
   let activeModal = false;
   async function remove() {
@@ -44,13 +53,57 @@
     });
   }
 
-  let menu = ["", "Close"];
+  let menu = ["", "Export Notes", "Close"];
   menu[0] = typeOfItem === "page" ? "Delete" : "Remove";
 
   let react = (func) => {
     if (func === "Remove" || func === "Delete") activeModal = true;
+    else if (func === "Export Notes") exportSelected()
     else endSelection();
   };
+
+  function onlyNotesSelected() {
+    let items = Array.from($selectedItems)
+    let onlyNotes = true
+    items.forEach(item => {
+      if (!item.id.includes('notes')) {
+        onlyNotes = false;
+      }
+    })
+    return onlyNotes
+   }
+
+  async function exportSelected() {
+    if (onlyNotesSelected()) {
+const body = { items: Array.from($selectedItems) };
+    try {
+      await fetch('/export/notes', {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "csrf-token": getToken(),
+        },
+        body: JSON.stringify(body),
+      });
+
+      let server
+      if ($page && $page.host === 'localhost:3000') {
+        server = 'http://localhost:3000'
+      } else {
+        server = `https://${$page.host}` 
+      }
+
+      const url = `${server}/export/notes`;
+      window.location.replace(url);
+
+    } catch (err) {
+      console.error(err);
+    }
+    }
+    
+  }
 
   function assignIco(icon) {
     switch (icon) {
@@ -58,6 +111,8 @@
         return IcoRemove;
       case "Delete":
         return IcoDelete;
+      case "Export Notes":
+        return IcoExport;
     }
   }
 </script>
@@ -103,7 +158,7 @@
     padding: 0;
     list-style: none;
     display: grid;
-    grid-template-columns: 100px 100px;
+    grid-template-columns: 100px 100px 100px;
     grid-template-rows: 70px;
     gap: 50px;
   }
@@ -118,6 +173,7 @@
     justify-content: center;
     transition: all 0.25s ease;
   }
+
   .Footer li:hover {
     background: var(--main-background-color);
   }
@@ -208,6 +264,10 @@
   .Footer li.Checkall.allChecked .Icon::after {
     background: #333333;
   }
+  .Footer li.Inactive {
+    color: #dddddd;
+    fill: #dddddd;
+  }
   .Footer li p {
     margin: 0;
     font-size: 0.75rem;
@@ -238,6 +298,16 @@
   <form class="Footer">
     <ul>
       {#each menu as button}
+      {#if !exportActive && button === "Export Notes"}
+        <li
+        class="Button Inactive Export_Notes"
+        on:click={() => react(button)}>
+        <span class="Icon">
+          <svelte:component this={assignIco(button)} />
+        </span>
+        <p>{button}</p>
+      </li>
+      {:else}
         <li
           class="Button {button.replace(' ', '')}"
           on:click={() => react(button)}>
@@ -246,6 +316,7 @@
           </span>
           <p>{button}</p>
         </li>
+        {/if}
       {/each}
     </ul>
   </form>

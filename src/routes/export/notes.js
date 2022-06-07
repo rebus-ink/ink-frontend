@@ -35,7 +35,7 @@ const {
   }
   
   let sources = []
-  const children = []
+  let children = []
 
   
   const listToDocx = list => {
@@ -72,13 +72,15 @@ const {
               children.push(
                 new Paragraph({
                   children: extractChildren(paragraph.sections, fontSize),
-                //   indent: {
-                //     left: 300,
-                //     right: 300
-                //   }
+                  indent: {
+                    left: 300,
+                    right: 300
+                  }
                 })
               )
               children.push(new Paragraph({text: ''}))
+              children.push(new Paragraph({text: ''}))
+
             } else {
               children.push(
                 new Paragraph({
@@ -86,6 +88,8 @@ const {
                 })
               )
               children.push(new Paragraph({text: ''}))
+              children.push(new Paragraph({text: ''}))
+
             }
           })
   
@@ -147,13 +151,15 @@ const {
         }
       ]
     })
+
+    sources = [];
+    children = [];
     return notesDoc
   }
 
 
 
   export async function post(req, res, next) {
-
     docxExport = listToDocx(req.body)
 
     res.send()

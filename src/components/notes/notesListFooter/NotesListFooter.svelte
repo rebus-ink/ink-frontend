@@ -11,11 +11,12 @@
   import AddNotebooks from "../../library/footer/AddNotebooks.svelte"
   import { getToken } from "../../../getToken";
   import {
-    selectedItems,
+    selectedNotes,
     refreshNotes,
     addedNotebooks,
     refreshNotebooks,
     refreshDate,
+    selectedSources,
     tags,
     page,
   } from "../../../stores";
@@ -25,21 +26,21 @@
   export let type;
   export let fullList;
 
-  $: console.log('page???', $page)
-
 
   let editing = false;
   let colour;
   let selectedFlags = [];
   let activeModal = false;
 
-  $: if (!$selectedItems.size) {
+  $: if (!$selectedNotes.size) {
     colour = undefined;
     selectedFlags = [];
   }
 
   let createObj = () => {
-    let obj = { items: Array.from($selectedItems) };
+    let body;
+    if(type==="note") body = { items: Array.from($selectedNotes) };
+    else body = {items: Array.from($selectedSources)}
     if (type === "note") {
       obj["tags"] = [];
 
@@ -110,7 +111,10 @@
   }
 
   async function remove() {
-    const body = { items: Array.from($selectedItems) };
+    let body;
+    if(type==="note") body = { items: Array.from($selectedNotes) };
+    else body = {items: Array.from($selectedSources)}
+    
     endSelection();
 
     const removeUrl =
@@ -137,14 +141,25 @@
   }
 
   let notesListed = [];
-  $: if ($selectedItems) {
+  $: if ($selectedNotes) {
     notesListed = [];
-    $selectedItems.forEach((obj) => {
+    $selectedNotes.forEach((obj) => {
       notesListed.push(obj);
     });
   }
 
+  let sourcesListed = [];
+  $: if ($selectedSources) {
+    sourcesListed = [];
+    $selectedSources.forEach((obj) => {
+      sourcesListed.push(obj);
+    });
+  }
+
   $: menu = ["Delete", "Export", "Check all", "Edit", "Close"];
+  $: if (type !== "note") {
+    menu = menu.filter((i) => i !=="Export")
+  }
   $: if ($page.path.startsWith("/notebooks"))
     menu = menu.filter((i) => i !== "Edit");
 
@@ -157,7 +172,7 @@
   };
 
   async function exportSelected() {
-    const body = { items: Array.from($selectedItems) };
+    const body = { items: Array.from($selectedNotes) };
     try {
       await fetch('/export/notes', {
         method: "POST",
@@ -439,5 +454,5 @@
     {/if}
   </form>
 {:else}
-  <DeletionModal {remove} bind:activeModal {type} plural={true} items={notesListed} />
+  <DeletionModal {remove} bind:activeModal {type} plural={true} items={type === "note" ? notesListed : sourcesListed} />
 {/if}
