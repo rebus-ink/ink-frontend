@@ -1,6 +1,7 @@
 June 7, 2022
 - more fixes to notes import / export
 - multi-page selection in all libraries
+- Add docker for deployment
 
 May 31, 2022
 - Upgrade npm 6.14.17 => 8.11.0
