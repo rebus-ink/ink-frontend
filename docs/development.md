@@ -8,7 +8,7 @@
 
 As the development environment is hosted in a Docker container, you must execute all commands
 in the context of the running container, either by (a) prefixing the commands with
-`docker compose exec nodejs` or (b) by "shelling" into the container `docker compose exec nodejs bash`.
+`docker compose exec frontend` or (b) by "shelling" into the container `docker compose exec frontend bash`.
 
 ## Configuration
 
