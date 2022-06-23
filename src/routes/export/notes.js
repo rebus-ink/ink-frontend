@@ -47,9 +47,9 @@ const {
         note.body.forEach(body => {
 
           if (body.motivation === 'highlighting') {
-              body.content = `Highlight: ${body.content}`
+              body.content = `HIGHLIGHT: ${body.content}`
           } else {
-              body.content = `Note: ${body.content}`
+              body.content = `NOTE: ${body.content}`
           }
 
           let paragraphs = htmlToDocxObject(body.content)

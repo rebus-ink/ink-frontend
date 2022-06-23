@@ -28,6 +28,8 @@ export const put = async function put(req,res,next) {
   let body;
  
   notes.forEach(async note => {
+    
+    if (note === "</p>" || note.length === 0) return; // empty note after *****
 
     if (note.includes(highlightDivider)) {
       let highlightIndex = note.indexOf(highlightDivider)
