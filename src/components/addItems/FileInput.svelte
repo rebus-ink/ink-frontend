@@ -83,7 +83,6 @@
         body: file,
     });
 
-console.log('??????', $page.path, atNotebook)
     if ($page.path === "/") {
       $refreshInNote = Date.now();
     } else if (atNotebook) {

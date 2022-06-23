@@ -76,59 +76,17 @@ async function deserialise(user) {
           });
           user.profile = await getProfile(user);
 
-          // create source with source file
-
-          const responseSource = await got.post(`${process.env.API_SERVER}sources`, {
+          // CREATE NOTEBOOK
+          const resNotebook = await got.post(`${process.env.API_SERVER}notebooks`, {
             headers: {
               "content-type": "application/ld+json",
               Authorization: `Bearer ${user.token}`
             },
             body: JSON.stringify({
-              name: "this is a sample source with a content file",
-              type: "Book",
-              json: {}
+              name: "Sample Notebook"
             })
           });
-
-          const resSource = JSON.parse(responseSource.body)
-          const sourceId = resSource.shortId
-          const uploadUrl = `readers/${sourceId.replace("-", "/")}/sample-source.epub`
-          const uploadBucket = storage.bucket(process.env.GOOGLE_STORAGE_BUCKET);
-
-          async function uploadFile() {
-
-            await uploadBucket.upload('src/sample-source.epub', {
-              destination: uploadUrl,
-            });
-          }
-          
-          uploadFile().catch(console.error).then(async() => {
-            let storageId = sourceId.substring(sourceId.indexOf('-')+1)
-            let source = Object.assign({}, resSource, {
-              json: {storageId},
-              links: [
-                {
-                  rel: ["alternate", "enclosure"],
-                  encodingFormat: "application/json",
-                  url: `/api/download/${storageId}`,
-                },
-                {
-                  rel: "contents",
-                  encodingFormat: "application/json",
-                  url: `/api/toc/${storageId}`,
-                }
-              ]
-            })
-            await got.patch(`${process.env.API_SERVER}sources/${sourceId}`, {
-              headers: {
-                "content-type": "application/ld+json",
-                Authorization: `Bearer ${user.token}`
-              },
-              body: JSON.stringify(source)
-            });
-
-          })
-
+          let notebook = JSON.parse(resNotebook.body)
 
 
           // CREATE EMPTY SOURCE
@@ -138,13 +96,12 @@ async function deserialise(user) {
               Authorization: `Bearer ${user.token}`
             },
             body: JSON.stringify({
-              name: "Sample source withtout content",
+              name: "Sample Source (no content)",
               type: "Book",
-              json: {}
+              json: {},
+              notebooks: [notebook]
             })
           });
-
-
 
           // CREATE NOTE
 
@@ -169,21 +126,10 @@ async function deserialise(user) {
                 motivation: "commenting",
                 content: "This is a note. Click to edit or delete it."
               },
-              tags: [colour1Tag[0]]
+              tags: [colour1Tag[0]],
+              notebooks: [notebook]
             })
           });
-    
-          // CREATE NOTEBOOK
-          await got.post(`${process.env.API_SERVER}notebooks`, {
-            headers: {
-              "content-type": "application/ld+json",
-              Authorization: `Bearer ${user.token}`
-            },
-            body: JSON.stringify({
-              name: "Sample Notebook"
-            })
-          });
-
 
         } catch (err) {
           console.error(err);
