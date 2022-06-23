@@ -38,21 +38,22 @@ const {
   let sources = []
   let children = []
 
-
   
   const listToDocx = list => {
 
     list.items.forEach(note => {
       // save source
-      if (note.source) sources.push(note.source)
+      if (note.source){
+       sources.push(note.source)
+      }
 
-        note.body.forEach(body => {
+       note.body.forEach(body => {
 
           if (body.motivation === 'highlighting') {
               body.content = `HIGHLIGHT: ${body.content}`
           } else {
               body.content = `NOTE: ${body.content}`
-          } 
+          }
 
           let paragraphs = htmlToDocxObject(body.content)
           let fontSize = 24
@@ -109,7 +110,7 @@ const {
               )
             }
           }
-        })
+       
         if (note.json && note.json.pages) {
           children.push(new Paragraph({ text: `Page number: ${note.json.pages}` }))
         }
@@ -119,8 +120,8 @@ const {
             text: '*****'
           })
         )
-      
     })
+  })
   
     if (sources.length) {
       sources = sources.map(source => source.name)
@@ -154,8 +155,6 @@ const {
       ]
     })
 
-    sources = [];
-    children = [];
 
     return notesDoc
   }
