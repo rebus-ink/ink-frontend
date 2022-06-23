@@ -1,3 +1,6 @@
+June 23, 2022
+- finalize import / export and onboarding
+
 June 7, 2022
 - more fixes to notes import / export
 - multi-page selection in all libraries
