@@ -1,3 +1,6 @@
+June 28, 2022
+- Fix missing satic images when deployed
+
 June 23, 2022
 - finalize import / export and onboarding
 
