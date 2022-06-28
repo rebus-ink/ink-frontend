@@ -41,6 +41,7 @@ WORKDIR /app
 
 COPY --from=deps /app .
 COPY --from=builder /app/sapper sapper
+COPY static static
 
 EXPOSE 3000
 CMD ["node", "sapper"]
