@@ -64,69 +64,69 @@
 
 
     form {
-        padding-bottom: 40px;
+      padding-bottom: 40px;
     }
 
     .SearchBox {
-    background-color: white;
-    height: 34px;
-    border-radius: 50px;
-    width: 100%;
-    position: relative;
-    float: left;
-  }
-  .SearchBox input {
-    font-family: var(--sans-fonts);
-    font-size: var(--item-font-size);
-    border: none;
-    font-weight: 700;
-    background: transparent;
-    position: absolute;
-    top: 50%;
-    left: 40px;
-    width: calc(100% - 50px);
-    height: 100%;
-    transform: translateY(-50%);
-    color: var(--action);
-    transition: all 0.25s ease-out;
-  }
-  .SearchBox input:focus {
-    outline: none;
-  }
-  .SearchBox:focus-within {
-    background: #e5ecf2;
-  }
-  .SearchBox input::placeholder {
-    color: var(--action);
-    opacity: 0.5;
-    font-weight: 500;
-  }
-  .SearchBox svg {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    margin: 0;
-    width: 15px;
-    height: 15px;
-  }
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration {
-    display: none;
-  }
-
-  @media (max-width: 640px) {
-    .SearchBox {
-      left: 0.5rem;
-      right: 0.5rem;
+      background-color: white;
+      height: 34px;
+      border-radius: 50px;
+      width: 100%;
+      position: relative;
+      float: left;
+    }
+    .SearchBox input {
+      font-family: var(--sans-fonts);
+      font-size: var(--item-font-size);
+      border: none;
+      font-weight: 700;
+      background: transparent;
       position: absolute;
-      width: calc(100% - 80px);
+      top: 50%;
       left: 40px;
-      top: 0;
+      width: calc(100% - 50px);
+      height: 100%;
+      transform: translateY(-50%);
+      color: var(--action);
+      transition: all 0.25s ease-out;
     }
-  }
+    .SearchBox input:focus {
+      outline: none;
+    }
+    .SearchBox:focus-within {
+      background: #e5ecf2;
+    }
+    .SearchBox input::placeholder {
+      color: var(--action);
+      opacity: 0.5;
+      font-weight: 500;
+    }
+    .SearchBox svg {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      margin: 0;
+      width: 15px;
+      height: 15px;
+    }
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .SearchBox {
+        left: 0.5rem;
+        right: 0.5rem;
+        position: absolute;
+        width: calc(100% - 80px);
+        left: 40px;
+        top: 0;
+      }
+    }
 
   </style>
   

@@ -4,15 +4,9 @@
     tags: [],
   };
   export let selected = false;
-  const spaces = ["Research", "Public_Scholarships", "Teaching", "Personal"];
 
   function getName(name) {
-    const space = name.split("/")[0].replace(" ", "_");
-    if (spaces.includes(space)) {
-      return name.replace(space + "/", "");
-    } else {
-      return name;
-    }
+    return name.split("/")[0].replace(" ", "_");
   }
   $: stackLength = item.tags.filter((tag) => {
     if (tag.type === "stack") return tag;

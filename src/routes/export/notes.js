@@ -5,10 +5,10 @@ const {
     TextRun,
     ExternalHyperlink,
     Packer
-  } = require('docx')
-  const { htmlToDocxObject } = require('html-to-docx')
+  } = require('docx');
+  const { htmlToDocxObject } = require('html-to-docx');
 
-  let docxExport
+  let docxExport;
 
   const extractChildren = (children, fontSize) => {
     return children.map(child => {
@@ -156,7 +156,6 @@ const {
     children = [];
     return notesDoc
   }
-
 
 
   export async function post(req, res, next) {

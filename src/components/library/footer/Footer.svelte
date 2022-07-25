@@ -49,28 +49,6 @@
       console.error(err);
     }
   }
-  /*
-  async function remove(event) {
-    event.preventDefault();
-    editing = false;
-    const body = { items: Array.from($selectedItems) };
-    endSelection();
-    try {
-      await fetch("/api/batch-update", {
-        method: "DELETE",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "csrf-token": getToken(),
-        },
-        body: JSON.stringify(body),
-      });
-      $refreshDate = Date.now();
-    } catch (err) {
-      console.error(err);
-    }
-  }*/
 
   $: editSource = Array.from($selectedSources);
   let removeTag = [];
@@ -97,26 +75,6 @@
     }
   };
 
-  let testNotebook = async (id) => {
-    if (removeNotebooks.some((getId) => getId === id)) return;
-    removeNotebooks = [...removeNotebooks].concat(id);
-    const body = { publicationId: editSource[0].shortId, notebookId: id };
-    try {
-      await fetch(`/api/publication/${editSource[0].shortId}/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "csrf-token": getToken(),
-        },
-        body: JSON.stringify(body),
-      });
-      $refreshDate = Date.now();
-    } catch (err) {
-      console.error(err);
-    }
-  };
 </script>
 
 <style>
@@ -275,24 +233,4 @@
     <Button type="submit">Save</Button>
   </span>
 </form>
-<!--
-  {:else}
-    <span class="FooterNumber">
-      <SecondaryButton
-        click={() => {
-          endSelection();
-        }}>
-        Cancel
-      </SecondaryButton>
-    </span>
-    <span class="FooterButtons">
-      <RiskyButton click={remove}>Delete</RiskyButton>
-      <Button
-        click={() => {
-          editing = true;
-        }}>
-        Edit
-      </Button>
-    </span>
-  {/if}
-</form>-->
+

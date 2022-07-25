@@ -5,7 +5,6 @@
   import History from "../widgets/History.svelte";
   import NavNotebook from "../img/NavNotebook.svelte";
   export let id;
-  export let noteId;
 </script>
 
 <style>
