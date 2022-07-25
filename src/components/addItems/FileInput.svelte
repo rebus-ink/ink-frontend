@@ -107,7 +107,6 @@
   async function change(event) {
     file = event.target.files[0];
     fileName = file.name;
-    if (!notesImport) {
 
     if (!notesImport) {
 

@@ -645,7 +645,8 @@
       {#if itemState === 'new'}
       <div>
 
-        <label>Pages: </label>
+        <p>Pages: </p>
+
         <input 
           class="page-input" 
           type="text" bind:value={pageNumber} />

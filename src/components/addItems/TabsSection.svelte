@@ -1,5 +1,4 @@
 <script>
-
     export let menu;
     export let itemState;
   </script>
@@ -22,7 +21,6 @@
       grid-gap: 35px;
       position: relative;
     }
-
     li {
       display: grid;
       grid-gap: 5px;

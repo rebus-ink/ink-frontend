@@ -3,10 +3,6 @@
     import { searchResults, notebooks, search,
       isEmpty, sourcesEmpty, notesEmpty,
       notebooksEmpty } from "../../stores"
-<<<<<<< HEAD:src/components/search/SearchPage.svelte
-=======
-    import ArrowDropDown from "../img/ArrowDropDown.svelte"
->>>>>>> fd32486 (cleaning up components):src/components/SearchPage.svelte
     import SearchResults from "./SearchResults.svelte"
 
     let notebookItems = [];

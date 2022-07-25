@@ -7,7 +7,6 @@ const {
     Packer
   } = require('docx');
   const { htmlToDocxObject } = require('html-to-docx');
-
   let docxExport;
 
 
@@ -158,7 +157,6 @@ const {
 
     return notesDoc
   }
-
 
 
   export async function post(req, res, next) {
