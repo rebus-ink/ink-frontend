@@ -32,7 +32,8 @@
     }
   },
   "engines": {
-    "node": ">14"
+    "node": ">14",
+    "npm": "^8.15.0"
   },
   "healthier": {
     "env": {
