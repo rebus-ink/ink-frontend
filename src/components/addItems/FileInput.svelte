@@ -1,4 +1,5 @@
 <script>
+  // used to upload source files and to import a docx containing notes
   import { getToken } from "../../getToken";
   import Button from "../widgets/Button.svelte"
   import {refreshNotes, refreshSourceNotes, refreshInNote, selectedNotebooks, selectedSource, tags} from "../../stores"
@@ -101,8 +102,6 @@
     file = event.target.files[0];
     fileName = file.name;
 
-
-
     if (!notesImport) {
 
     if (supportedTypes.indexOf(file.type) === -1) {
@@ -149,7 +148,6 @@
     }
   } else {
 
-    console.log(file)
     if (file.name.toLowerCase().endsWith('.docx')) {
       error = false;
     } else {
@@ -191,19 +189,7 @@
   }
   .input:hover {
     background: rgba(255, 255, 255, 0.1);
-  } /*
-  .dark .input {
-    border-color: transparent;
-    color: #fff;
-    background-color: rgba(255,255,255, 0.125);
-  }*/
-  /* label:focus-within .input {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(104, 214, 212, 0.6);
-  }
-  label.dark:focus-within .input {
-    box-shadow: 0 0 2px 2px white;
-  } */
+  } 
   .dark input::placeholder {
     color: rgba(255, 255, 255, 0.8);
   }

@@ -1,4 +1,5 @@
 <script>
+  // Card for Sources in the library or in the notebook
   import ItemStacks from "./ItemStacks.svelte";
   import IcoNotebook from "../img/IcoNotebook.svelte"
   import {

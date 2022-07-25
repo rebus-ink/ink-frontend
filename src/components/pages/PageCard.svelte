@@ -139,13 +139,6 @@
   .Title.Error {
     color: #f05657;
   }
-  footer p.Type {
-    color: #333333;
-    font-size: 0.7rem;
-    font-weight: 500;
-    margin: 0;
-    transform: translateY(-3px);
-  }
 </style>
 
 <div class="Item">

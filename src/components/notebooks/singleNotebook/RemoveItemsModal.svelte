@@ -1,7 +1,6 @@
 <script>
   import NotesFound from "../../addItems/Tools/NotesFound.svelte";
   import NoDeletion from "../../img/NoDeletion.svelte";
-  import IcoNotebook from "../../img/IcoNotebook.svelte";
   import NavSource from "../../img/NavSource.svelte";
 
   export let remove;

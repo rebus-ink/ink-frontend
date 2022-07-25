@@ -1,4 +1,9 @@
+
 <script>
+  // NOTE: collections are user-generated tags. They exist in some forms
+  // such as the library footer, but do not show up elsewhere.
+  // the goal was to make user-generated tags more useful, eventually.
+
   import {
     collections,
     addedCollections

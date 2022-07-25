@@ -31,8 +31,6 @@
     clicked = true;
   };
 
-  //clearSelected();
-
   $: selectable =
     $page.path === "/library/all/all" || $page.path === "/library/all/all/"
       ? true

@@ -59,19 +59,6 @@
     position: relative;
     width: 100%;
   }
-  .newProp > p {
-    color: var(--action);
-    font-weight: 600;
-    text-decoration: underline;
-    position: relative;
-  }
-  .newProp > input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 2;
-    top: 0;
-  }
   .inputList {
     display: none;
     list-style: none;

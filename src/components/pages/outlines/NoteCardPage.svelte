@@ -2,7 +2,7 @@
   import NavSource from "../../img/NavSource.svelte";
   import { page, addSelected, selectedItems, removeSelected } from "../../../stores";
   export let note = {};
-  export let selection = function() {}
+  //export let selection = function() {}
   let selected = false
   export let selecting;
 

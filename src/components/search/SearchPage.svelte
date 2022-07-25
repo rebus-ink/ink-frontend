@@ -3,7 +3,6 @@
     import { searchResults, notebooks, search,
       isEmpty, sourcesEmpty, notesEmpty,
       notebooksEmpty } from "../../stores"
-    import ArrowDropDown from "../img/ArrowDropDown.svelte"
     import SearchResults from "./SearchResults.svelte"
 
     let notebookItems = [];
@@ -30,36 +29,35 @@
       let advancedOptions = false;
       let selectTypes = false;
       let selectedTypes = [];
-      let selectedNotebook;
   
       let types = [
-      "Article",
-      "Blog",
-      "Book",
-      "Chapter",
-      "Collection",
-      "Comment",
-      "Conversation",
-      "Course",
-      "Dataset",
-      "Drawing",
-      "Episode",
-      "Manuscript",
-      "Map",
-      "MediaObject",
-      "MusicRecordig",
-      "Painting",
-      "Photograph",
-      "Play",
-      "Poster",
-      "PublicationIssue",
-      "PublicationVolume",
-      "Review",
-      "ShortStory",
-      "Thesis",
-      "VisualArtwork",
-      "WebContent"
-    ];
+        "Article",
+        "Blog",
+        "Book",
+        "Chapter",
+        "Collection",
+        "Comment",
+        "Conversation",
+        "Course",
+        "Dataset",
+        "Drawing",
+        "Episode",
+        "Manuscript",
+        "Map",
+        "MediaObject",
+        "MusicRecordig",
+        "Painting",
+        "Photograph",
+        "Play",
+        "Poster",
+        "PublicationIssue",
+        "PublicationVolume",
+        "Review",
+        "ShortStory",
+        "Thesis",
+        "VisualArtwork",
+        "WebContent"
+      ];
   
       async function submit(e) {
           e.preventDefault();
@@ -103,15 +101,6 @@
                   description: notebookDescription
               }
           }
-  
-        //   if (selectedNotebook && includeNotes) {
-        //       requestBody.notes.notebook = selectedNotebook.shortId
-        //   }
-  
-        //   if (selectedNotebook && includeSources) {
-        //       requestBody.sources.notebook = selectedNotebook.shortId
-        //   }
-  
   
           const result = await window.fetch("/api/search", {
               method: "POST",
@@ -310,9 +299,9 @@
           margin: 20px;
           padding-bottom: 40px;
       }
-      .SelectNotebook {
+      /* .SelectNotebook {
           padding: 20px 0;
-      }
+      } */
       .advancedOptions {
           display: grid;
           grid-template-columns: 200px 150px 150px 350px;

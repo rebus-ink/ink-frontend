@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte";
   import { goto, stores } from "@sapper/app";
   const { page } = stores();
   export let query;
@@ -31,9 +30,7 @@
     //length(event);
     return sortItems(event.target.value);
   }
-  onMount(() => {
-    //length({ target: selectElement });
-  });
+
 </script>
 
 <style>
