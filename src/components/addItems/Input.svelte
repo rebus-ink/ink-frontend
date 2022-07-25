@@ -1,4 +1,5 @@
 <script>
+  // all-purpose input component.
   export let name;
   export let placeholder = "";
   export let dark = false;

@@ -6,7 +6,6 @@
   import { page } from "../../../stores";
 
   export let addNewNote;
-  export let filters;
   export let disabled;
 
   // NOTE FROM MARIE: don't know why the api-server is wrong on production, but hard coding seems to fix it for now.
@@ -25,7 +24,6 @@
 
 <style>
   .Tools,
-  li.Tool ul,
   li.Tool :global(ul) {
     background: #ffffff;
     border: 1px solid #eeeeee;
@@ -38,7 +36,6 @@
     -moz-box-shadow: 5px 5px 30px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 5px 5px 30px 0px rgba(0, 0, 0, 0.1);
   }
-  li.Tool ul,
   li.Tool :global(ul) {
     position: absolute;
     padding: 7px 0;
@@ -48,7 +45,6 @@
     transform: translateX(calc(100% + 5px));
     display: none;
   }
-  li.Tool:hover > ul,
   li.Tool :global(li:hover ul) {
     display: grid;
   }
@@ -59,8 +55,6 @@
     cursor: pointer;
     transition: all 0.2s ease-out;
   }
-  li.Children:hover::before,
-  li.Children ul:hover:before,
   .Tools :global(li.Children:hover::before),
   .Tools :global(li.Children ul:hover:before) {
     content: "";
@@ -70,20 +64,11 @@
     top: 0;
     left: 50%;
   }
-  li.Children ul:hover:before,
   .Tools :global(li.Children ul:hover:before) {
     left: 5px;
   }
   li.Tool ul li,
-  li.Tool ul :global(li) {
-    display: grid;
-    padding: 5px 10px;
-    text-align: left;
-    align-items: center;
-    gap: 7px;
-    border-radius: 7px;
-    grid-template-columns: max-content 1fr max-content;
-  }
+
   li.Tool :global(.Current),
   li.Tool :global(li:hover) {
     background: var(--main-background-color);
@@ -92,9 +77,6 @@
     color: var(--action);
     opacity: 0;
     transition: all 0.2s ease-out;
-  }
-  .Tool.List :global(li.Current svg.Check) {
-    opacity: 1;
   }
   ul.Tools {
     position: fixed;
@@ -122,12 +104,10 @@
     margin: 0;
     font-weight: 400;
   }
-  p.Header,
   ul.Tools :global(p.Preview),
   ul.Tools :global(p.Header) {
     color: #888888;
   }
-  ul.Tools p.Header,
   ul.Tools :global(p.Header) {
     text-align: left;
     padding-left: 30px;
@@ -145,10 +125,6 @@
   ul.Tools span.Division.Short {
     width: 50%;
     margin: 10px auto;
-  }
-  ul.Tools span.Division.Long {
-    width: 70%;
-    margin: 4px auto;
   }
   ul.Tools :global(span.Division.Full) {
     width: 100%;
@@ -184,13 +160,6 @@
   .Tools :global(.Checkbox.Unchecked::after) {
     content: inherit;
   }
-  li.Tool ul :global(li.Children) {
-    grid-template-columns: max-content 1fr max-content 13px;
-  }
-  li.Tool ul :global(li.Children ul) {
-    top: inherit;
-    bottom: -8px;
-  }
   .Tool :global(li.Flags > svg.arrow),
   .Tool :global(li.Colours > svg.arrow) {
     transform: rotate(-90deg);
@@ -199,25 +168,6 @@
     right: inherit;
     height: 9px;
     width: auto;
-  }
-  ul.Tools p.Header.And {
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: #ffffff;
-    padding: inherit;
-    width: 40px;
-  }
-  span.Notification {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #f05657;
-    position: absolute;
-    top: 5px;
-    right: 5px;
   }
   .NewItem {
     position: absolute;
@@ -231,38 +181,6 @@
     opacity: 0;
     cursor: pointer;
     border: none;
-  }
-  .Export p.Message {
-    display: none;
-    background: rgba(0, 34, 48, 0.9);
-    font-size: 0.7rem;
-    color: #fff;
-    padding: 3px 10px;
-    font-weight: 500;
-    bottom: 0;
-    margin: 0;
-    left: 50%;
-    text-transform: capitalize;
-    position: absolute;
-    border-radius: 5px;
-    transform: translate(-50%, calc(100% + 5px));
-  }
-  .Export:hover p.Message {
-    display: block;
-  }
-  .Export p.Message::after {
-    content: "";
-    top: -9px;
-    left: 50%;
-    width: 0px;
-    height: 0px;
-    border-radius: 3px;
-    position: absolute;
-    border-style: solid;
-    border-width: 6px;
-    transform: translate(-50%, 3px) rotate(45deg);
-    border-color: rgba(0, 34, 48, 0.9) transparent transparent
-      rgba(0, 34, 48, 0.9);
   }
 </style>
 

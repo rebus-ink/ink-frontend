@@ -25,10 +25,10 @@ The base route maps the feature to the path located in `src/routes`.
 
 ## API Endpoints `/api/**`
 
-- API endpoints that provide request pre-processing and proxying to the [Rebus Ink API server](https://github.com/RebusFoundation/reader-api)
+- API endpoints that provide request pre-processing and proxying to the [Rebus Ink API server](https://github.com/rebus-ink/ink-API)
 - Signed URL generation for direct uploading to a Google Storage bucket (other storage backends aren't supported)
-- A Google Cloud Function that processes uploaded files and turns them into more easily processable JSON files (using [`ink-engine`](https://github.com/RebusFoundation/ink-engine)). Found at [`functions/onfinalize/index.js`](functions/onfinalize)
-- A `read` endpoint that takes those processed JSON files, matches annotations to the server-rendered HTML (using `ink-engine` and [`rehype-annotate`](https://github.com/RebusFoundation/rehype-annotate))
+- A Google Cloud Function that processes uploaded files and turns them into more easily processable JSON files (using [`ink-engine`](https://github.com/rebus-ink/ink-engine)). Found at [`functions/onfinalize/index.js`](functions/onfinalize)
+- A `read` endpoint that takes those processed JSON files, matches annotations to the server-rendered HTML (using `ink-engine` and [`rehype-annotate`](https://github.com/rebus-ink/rehype-annotate))
 
 ## Directory Structure
 

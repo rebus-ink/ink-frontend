@@ -40,7 +40,6 @@
 
   let itemEdit,
     newValue,
-    coverImageModal,
     init = (e, current) => {
       e.focus();
       newValue = current;

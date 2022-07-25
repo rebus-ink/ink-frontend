@@ -23,15 +23,6 @@
     grid-gap: 35px;
     position: relative;
   }
-  ul.itemType .source:hover ~ span {
-    left: -9px !important;
-  }
-  ul.itemType .notes:hover ~ span {
-    left: 91px !important;
-  }
-  ul.itemType .notes.active ~ span {
-    left: 91px;
-  }
   li {
     display: grid;
     grid-gap: 5px;

@@ -15,8 +15,8 @@
   import { onDestroy, onMount } from "svelte";
   import { text } from "svelte/internal";
   export let note;
-  export let annotations;
-  export let element;
+  // export let annotations;
+  // export let element;
   // $: if (element && annotations) {
   //   element.addEventListener("annotation-id-change", () => {
   //     note = annotations[element.dataset.annotationId];

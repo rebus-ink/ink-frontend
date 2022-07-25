@@ -41,10 +41,6 @@
     --item-font-size: 0.7rem;
     --list-grid-gap: calc(var(--base) * 0.5);
   }
-  .Header > div {
-    display: flex;
-    align-items: center;
-  }
   .Cards {
     position: relative;
     display: grid;
