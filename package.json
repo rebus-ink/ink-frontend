@@ -81,7 +81,7 @@
     "html-to-docx": "git+https://git@github.com/rebus-ink/html-to-docx.git",
     "inert-polyfill": "^0.2.5",
     "ink-engine": "git+https://git@github.com/rebus-ink/ink-engine.git",
-    "iso-639-1": "^2.1.33",
+    "iso-639-1": "^2.0.0",
     "jsdom": "^19.0.0",
     "jsonwebtoken": "^8.5.1",
     "link-preview-js": "^2.1.13",
