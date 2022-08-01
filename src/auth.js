@@ -3,7 +3,10 @@ import jwt from "jsonwebtoken";
 import got from "got";
 import httpStrategies from "passport-http";
 import debugSetup from "debug";
+import path from "path";
 import Auth0Strategy from "passport-auth0";
+const { Storage } = require("@google-cloud/storage");
+const storage = new Storage();
 const debug = debugSetup("vonnegut:auth");
 // const LocalStrategy = require('passport-local').Strategy
 // const {Firestore} = require('@google-cloud/firestore');
@@ -72,6 +75,62 @@ async function deserialise(user) {
             })
           });
           user.profile = await getProfile(user);
+
+          // CREATE NOTEBOOK
+          const resNotebook = await got.post(`${process.env.API_SERVER}notebooks`, {
+            headers: {
+              "content-type": "application/ld+json",
+              Authorization: `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+              name: "Sample Notebook"
+            })
+          });
+          let notebook = JSON.parse(resNotebook.body)
+
+
+          // CREATE EMPTY SOURCE
+          await got.post(`${process.env.API_SERVER}sources`, {
+            headers: {
+              "content-type": "application/ld+json",
+              Authorization: `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+              name: "Sample Source (no content)",
+              type: "Book",
+              json: {},
+              notebooks: [notebook]
+            })
+          });
+
+          // CREATE NOTE
+
+          // need to give it a colour
+          const tags = await got.get(`${process.env.API_SERVER}tags`, {
+            headers: {
+              "content-type": "application/ld+json",
+              Authorization: `Bearer ${user.token}`
+            }
+          });
+
+          const tagsList = JSON.parse(tags.body)
+          let colour1Tag = tagsList.filter(x => x.name === "colour1")
+
+          await got.post(`${process.env.API_SERVER}notes`, {
+            headers: {
+              "content-type": "application/ld+json",
+              Authorization: `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+              body: {
+                motivation: "commenting",
+                content: "This is a note. Click to edit or delete it."
+              },
+              tags: [colour1Tag[0]],
+              notebooks: [notebook]
+            })
+          });
+
         } catch (err) {
           console.error(err);
         }

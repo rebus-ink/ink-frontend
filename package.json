@@ -32,7 +32,8 @@
     }
   },
   "engines": {
-    "node": ">14"
+    "node": ">14",
+    "npm": "^8.15.0"
   },
   "healthier": {
     "env": {
@@ -67,6 +68,7 @@
     "date-fns": "^2.28.0",
     "debug": "^4.3.4",
     "document-register-element": "^1.14.10",
+    "docx": "^7.3.0",
     "dom-anchor-text-position": "^5.0.0",
     "dom-anchor-text-quote": "^4.0.2",
     "dom-seek": "^5.1.1",
@@ -74,10 +76,12 @@
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "fg-modal": "^0.2.0",
+    "dotenv": "^8.6.0",
     "got": "^10.7.0",
+    "html-to-docx": "git+https://git@github.com/rebus-ink/html-to-docx.git",
     "inert-polyfill": "^0.2.5",
-    "ink-engine": "github:rebus-ink/ink-engine",
-    "iso-639-1": "^2.1.13",
+    "ink-engine": "git+https://git@github.com/rebus-ink/ink-engine.git",
+    "iso-639-1": "^2.1.33",
     "jsdom": "^19.0.0",
     "jsonwebtoken": "^8.5.1",
     "link-preview-js": "^2.1.13",
@@ -124,7 +128,6 @@
     "@web/test-runner-chrome": "^0.9.4",
     "@web/test-runner-puppeteer": "^0.9.3",
     "compression": "^1.7.4",
-    "dotenv": "^8.6.0",
     "faker": "^4.1.0",
     "fetch-mock": "^9.11.0",
     "friendly-words": "^1.1.10",

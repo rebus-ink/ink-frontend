@@ -4,7 +4,6 @@
   import HighlightButton from "./HighlightButton.svelte";
   import HighlightNoteField from "./HighlightNoteField.svelte";
   import HighlightNotebooks from "./HighlightNotebooks.svelte";
-  import HighlightSelectedFlags from "./HighlightSelectedFlags.svelte";
   import HighlightNoteButton from "./HighlightNoteButton.svelte";
   import { assignIco } from "../source-margin/assignIco.js";
   import IcoNotebook from "../../img/IcoNotebook.svelte";

@@ -9,14 +9,11 @@
     import FlagToDo from "../../img/FlagToDo.svelte";
     import FlagUrgent from "../../img/FlagUrgent.svelte";
     import IcoNotebook from "../../img/IcoNotebook.svelte"
-    import IcoTag from "../../source/source-highlight/IcoTag.svelte"
     import CloseIcon from "../../source/source-highlight/CloseIcon.svelte"
-    import IcoNewNote from "../../img/IcoNewNote.svelte";
-    import HighlightNotebooks from "../../source/source-highlight/HighlightNotebooks.svelte"
-    import HighlightFlags from "../../source/source-highlight/HighlightFlags.svelte"
-    import Button from "../../widgets/Button.svelte";
     import Closer from "../../widgets/Closer.svelte";
-    import WhiteButton from "../../workspace/WhiteButton.svelte";
+    import WhiteButton from "../../widgets/WhiteButton.svelte";
+    import TabsSection from "../../addItems/TabsSection.svelte"
+    import FileInput from "../../addItems/FileInput.svelte"
     import { send, receive } from "../../../routes/_crossfade.js";
     import { tick } from "svelte";
     import NoteEditor from "../../widgets/NoteEditor.svelte";
@@ -31,6 +28,7 @@
     export let note = { body: [], source: { name: "" } };
     export let source;
     export let pages = true;
+    let itemState = "new"
     $: console.log(pages)
     let selectedFlags = [];
     let selectedNotebooks = [];
@@ -53,6 +51,10 @@
     $: if($tags.items) {
       flags = $tags.items.filter(tag => tag.type === 'flag').map(tag => tag.name)
       flags.unshift('')
+    }
+
+    function menu(state) {
+      if (state) itemState = state;
     }
 
     function assignIco(icon) {
@@ -577,6 +579,9 @@
   
   {#if open}
     <div class="NewBox newNote">
+
+      <TabsSection {menu} {itemState} />
+
       <form
         id="newform"
         class="newForm"
@@ -612,7 +617,7 @@
           </label>
 
         </div>
-      {#if pages}
+      {#if pages && itemState === "new"}
         <div>
           Pages: <input class="page-input" type="text" bind:value={pageNumber} />
 
@@ -621,7 +626,7 @@
         
       </div>
         <br/>
-
+        {#if itemState === "new"}
         <div class="Editor {error ? "error" : noteColour}">
           <NoteEditor bind:richtext={text} />
         </div>
@@ -644,8 +649,8 @@
         <WhiteButton click={submit}>Create</WhiteButton>
 
         <Closer click={close} dark={true} />
+        {/if}
         <div class="dropdown">
-
 
           {#if $defaultNotebook && $defaultNotebook.name && useDefault}
           <div class="Flag Item">
@@ -673,10 +678,23 @@
                 }} />
             </div>
           {/each}
+          {#if itemState !== "new"}
+          <p>
+            Import notes from a docx document. <br/>
+            Notes should be separated with ***** <br/>
+            For notes with highlights, The highlight should be preceded with "HIGHLIGHT:"
+            and associated note (optional) with "NOTE:"
+          </p>
+          <FileInput notesImport=true close={close} ntbkClose={ntbkClose} {noteColour} {source} />
+      
+          {/if}
         </div>
           </div>
+
       </form>
+
     </div>
+
 {:else}
     <button
     class="Item"

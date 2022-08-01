@@ -22,9 +22,7 @@ export const tags = derived(refreshCollections, ($refreshCollections, set) => {
       console.error(err);
     });
 });
-export const workspaces = derived(tags, ($tags, set) => {
-  set($tags.items.filter(tag => tag.type === "workspace"));
-});
+
 export const collections = derived(tags, ($tags, set) => {
   const stacks = $tags.items
     .filter(tag => tag.type === "stack")
@@ -32,11 +30,8 @@ export const collections = derived(tags, ($tags, set) => {
   set(stacks);
 });
 
-export const addingWorkspace = writable("all");
-
 export const addedCollections = writable([]);
 
-export const addedWorkspaces = writable([]);
 
 const spaces = ["Research", "Public_Scholarships", "Teaching", "Personal"];
 function getName(name) {

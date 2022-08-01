@@ -1,10 +1,6 @@
 <script>
-  import Button from "../widgets/Button.svelte";
   import Closer from "../widgets/Closer.svelte";
-  import WhiteButton from "../workspace/WhiteButton.svelte";
   import PageTypeCard from "./Tools/PageTypeCard.svelte";
-  import { send, receive } from "../../routes/_crossfade.js";
-  import { tick } from "svelte";
   import { getToken } from "../../getToken";
   import { page } from "../../stores";
   import { goto } from "@sapper/app";
@@ -24,7 +20,7 @@
       );
 
       await window
-        .fetch(`/api/pages`, {
+        .fetch(`/api/outlines`, {
           method: "POST",
           credentials: "include",
           body: JSON.stringify(payload),
@@ -41,13 +37,6 @@
     }
   }
 
-  let click = () => {
-    open = !open;
-    title = "";
-  };
-  let init = (e) => {
-    e.focus();
-  };
 </script>
 
 <style>

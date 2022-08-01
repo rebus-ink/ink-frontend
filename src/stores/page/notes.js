@@ -10,7 +10,7 @@ export const pageNotes = derived(
   [page, refreshPageNotes, searchPageNotes],
   ([$page, $refreshPageNotes, $searchPageNotes], set) => {
     if (!process.browser) return;
-    if (!$page.path || !$page.path.startsWith("/pages/")) return;
+    if (!$page.path || !$page.path.startsWith("/outlines/")) return;
     if ($page.query.returnTo || !$page.query.notebook) return;
     set({ type: "loading", items: [] });
     const query = Object.assign({}, $page.query);

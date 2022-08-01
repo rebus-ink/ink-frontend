@@ -1,10 +1,10 @@
 <script>
   import { notebooks, clearSelected, selectedItems } from "../../stores";
-  import NotesListFooter from "../notes/NotesListFooter.svelte";
-  import SortSelect from "../workspace/SortSelect.svelte";
+  import NotesListFooter from "../notes/notesListFooter/NotesListFooter.svelte";
+  import SortSelect from "../library/SortSelect.svelte";
   import NoNotebooks from "../img/NoNotebooks.svelte";
-  import SearchNotebooks from "./Tools/SearchNotebooks.svelte";
-  import PaginationButtons from "../PaginationButtons.svelte";
+  import SearchNotebooks from "./SearchNotebooks.svelte";
+  import PaginationButtons from "../widgets/PaginationButtons.svelte";
   import NotebookCard from "./NotebookCard.svelte";
 
   import { stores } from "@sapper/app";
@@ -26,7 +26,7 @@
     clearSelected();
   }
 
-  clearSelected();
+  //clearSelected();
 
   let selectAll = false;
   let chooseAll = () => {
@@ -40,10 +40,6 @@
     --list-template-columns: 60px 1fr 1fr 0.5fr 0.5fr 2rem;
     --item-font-size: 0.7rem;
     --list-grid-gap: calc(var(--base) * 0.5);
-  }
-  .Header > div {
-    display: flex;
-    align-items: center;
   }
   .Cards {
     position: relative;

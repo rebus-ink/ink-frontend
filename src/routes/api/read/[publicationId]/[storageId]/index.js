@@ -2,7 +2,6 @@ const { Storage } = require("@google-cloud/storage");
 const storage = new Storage();
 const path = require("path");
 
-// This needs to filter by workspace
 export async function get(req, res, next) {
   // Does this need to load notes as well?
   if (!req.user.profile) return res.sendStatus(401);

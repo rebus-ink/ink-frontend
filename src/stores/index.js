@@ -13,9 +13,9 @@ export { insource, refreshInSource } from './insource'
 export { innote, refreshInNote } from './innote'
 export { inntbk, refreshInNtbk } from './inntbk'
 export { notes, refreshNotes, searchNotes, sourceNotes, 
-  refreshSourceNotes } from './notes'
+  refreshSourceNotes, selectedNotebooks, selectedSource } from './notes'
 export { notebooks, refreshNotebooks, searchNotebooks, addedNotebooks, defaultNotebook } from './notebooks'
-export { collections, workspaces, tags, refreshCollections, addingWorkspace, addedCollections, addedWorkspaces } from './collections'
+export { collections, tags, refreshCollections, addedCollections} from './collections'
 export { note, refreshNote } from './note'
 export { notebook, refreshNotebook } from './notebook'
 export { pageItem, refreshPageItem } from "./pageitem";
@@ -48,4 +48,38 @@ export function removeSelected(item) {
 }
 export function clearSelected() {
   selectedItems.set(new Set());
+}
+
+export const selectedNotes = writable(new Set());
+
+export function addSelectedNote(item) {
+  selectedNotes.update(set => {
+    return set.add(item);
+  });
+}
+export function removeSelectedNote(item) {
+  selectedNotes.update(set => {
+    set.delete(item);
+    return set;
+  });
+}
+export function clearSelectedNotes() {
+  selectedNotes.set(new Set());
+}
+
+export const selectedSources = writable(new Set());
+
+export function addSelectedSource(item) {
+  selectedSources.update(set => {
+    return set.add(item);
+  });
+}
+export function removeSelectedSource(item) {
+  selectedSources.update(set => {
+    set.delete(item);
+    return set;
+  });
+}
+export function clearSelectedSources() {
+  selectedSources.set(new Set());
 }

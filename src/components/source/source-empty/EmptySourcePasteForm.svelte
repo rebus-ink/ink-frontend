@@ -104,28 +104,12 @@
     margin: 0;
     font-weight: bold;
   }
-  p {
-    color: #888888;
-    margin: 0.5rem;
-    font-size: 0.85rem;
-  }
 
   .Text {
     margin: 2rem;
   }
   .pasting .Text {
     margin-bottom: 0;
-  }
-  .Icon {
-    background: #dde8ed;
-    border-radius: 30px;
-    padding: 1.25rem 2rem;
-    width: min-content;
-    color: #005173;
-    margin: 3rem auto;
-  }
-  svg {
-    width: 45px;
   }
 
   .Pane {

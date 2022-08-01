@@ -2,8 +2,6 @@ import got from "got";
 
 // Make a list of fake notes: motivation, lang, id, body
 
-// This needs to filter by workspace
-// This needs to filter by workspace
 export async function put(req, res, next) {
   const url = `${process.env.API_SERVER}notebooks/${req.params.notebookId}/notes/${req.params.noteId}`;
   delete req.body._tags;

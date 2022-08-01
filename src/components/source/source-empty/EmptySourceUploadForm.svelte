@@ -1,6 +1,6 @@
 <script>
   import Button from "../../widgets/Button.svelte";
-  import UploadIcon from "./UploadIcon.svelte";
+  import UploadIcon from "../../img/UploadIcon.svelte";
   import { getToken } from "../../../getToken";
   import { goto } from "@sapper/app";
   import FileInput from "./EmptySourceFileInput.svelte";

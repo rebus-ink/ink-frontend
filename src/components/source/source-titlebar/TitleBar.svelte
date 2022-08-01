@@ -1,5 +1,5 @@
 <script>
-  import History from "../../History.svelte";
+  import History from "../../widgets/History.svelte";
   import { onMount } from "svelte";
   export let name = "";
   export let source;

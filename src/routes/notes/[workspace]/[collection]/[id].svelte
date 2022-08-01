@@ -1,7 +1,7 @@
 <script>
-  import Notes from "../../../../components/Notes.svelte";
+  import Notes from "../../../../components/notes/Notes.svelte";
   import { stores } from "@sapper/app";
   const { page } = stores();
 </script>
 
-<Notes workspace={$page.params.workspace} id={$page.params.id} />
+<Notes id={$page.params.id} />

@@ -56,8 +56,6 @@ if (dev) {
   // }
   process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0; // eslint-disable-line
 }
-if (dev) {
-}
 
 export function setup(sapper, options = {}) {
 
@@ -68,7 +66,11 @@ export function setup(sapper, options = {}) {
   app.set("trust proxy", true);
 
   const sessionMiddleware = session({
+<<<<<<< HEAD
   //  store: new RedisStore({ client }),
+=======
+    //store: new RedisStore({ client }),
+>>>>>>> 32b5763 (export notes)
     secret: process.env.COOKIE_KEY || "randome stuff",
     resave: false,
     rolling: true,

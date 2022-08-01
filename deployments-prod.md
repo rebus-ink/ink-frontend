@@ -1,3 +1,10 @@
+1.0.0 - May 2022
+
+Deployment Dec 13, 2021
+- Multimedia support (photo and audio uploads, video links)
+- Enforce file type in uploads in create source forms
+- improve search to better handle empty results
+
 Deployment Nov 18, 2021
 - fix bug with source navigation
 - advanced search

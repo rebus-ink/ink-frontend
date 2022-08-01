@@ -1,15 +1,14 @@
 <script>
   import { page as pageStore, error } from "../stores";
   import { title } from "../stores/title.js";
-  import Nav from "../components/Nav.svelte";
+  import Nav from "../components/widgets/Nav.svelte";
   import SignIn from "../components/Auth/SignIn.svelte";
-  import NoteEditDialog from "../components/notes/NoteEditDialog.svelte";
+  import NoteEditDialog from "../components/notes/noteEdit/NoteEditDialog.svelte";
   import { stores } from "@sapper/app";
   const { page, session } = stores();
   export let segment;
   let params;
   let publication = false;
-  let pageWorkspace = false;
   let betaNotice = true;
   $: if ($page) {
     pageStore.set($page);
@@ -43,7 +42,6 @@
       // After the event has been dispatched you call refresh with the current path?
     });
   }
-  $: pageWorkspace = $page.params && $page.params.pageId ? true : false;
 
   let menu = true;
   $: if (segment === "library" && $page.query && $page.query.returnTo) {
@@ -206,8 +204,8 @@
       </span>
     </div>
   {/if}
-  <main class="grid" class:publication class:pageWorkspace>
-    {#if !publication && !pageWorkspace}
+  <main class="grid" class:publication >
+    {#if !publication}
       <Nav {params} />
     {/if}
     <div class="content" class:publication>

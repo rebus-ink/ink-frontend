@@ -3,17 +3,14 @@
   import { writable } from "svelte/store";
   import { title } from "../../stores/title.js";
   import { source$, chapter$ } from "../../../state/state";
-  import HistoryReadingInterface from "../HistoryReadingInterface.svelte";
+  import HistoryReadingInterface from "../widgets/HistoryReadingInterface.svelte";
   import { bookmarks$ } from "../../../state/models/Bookmark";
   import Chapter from "./source-chapter/Chapter.svelte";
-  // import TitleBar from '../../../../components/source/source-titlebar/TitleBar.svelte';
   import InfoModal from "./source-info/InfoModal.svelte";
   import ToolBar from "./source-toolbar/ToolBar.svelte";
-  import InfoToolBar from "../publication/reader/InfoToolBar.svelte";
+  import InfoToolBar from "./source-titlebar/InfoToolBar.svelte";
   import MainInfo from "./source-info/Info.svelte";
-  // import EmptySource from "../../../../components/publication/EmptySource.svelte";
   import { stores } from "@sapper/app";
-  import DefaultNotebookForm from "../publication/reader/DefaultNotebookForm.svelte"
   export let chapter;
   export let source;
   $: if (source) {

@@ -3,14 +3,14 @@
   import { innote, insource, inntbk, searchResults } from "../stores";
   import NotesCard from "../components/notes/NotesCard.svelte";
   import NotebookCard from "../components/notebooks/NotebookCard.svelte";
-  import NewNote from "../components/notes/NewNote.svelte";
+  import NewNote from "../components/addItems/NewNote.svelte";
   import NewNotebook from "../components/notebooks/NewNotebook.svelte";
-  import NewItem from "../components/workspace/NewItem.svelte";
+  import NewItem from "../components/addItems/NewItemInLibrary.svelte";
   import NoNotes from "../components/img/NoNotes.svelte";
   import NoNotebooks from "../components/img/NoNotebooks.svelte";
   import NoSources from "../components/img/NoSources.svelte";
-  import Item from "../components/workspace/Item.svelte";
-  import Loader from "../components/Loader.svelte";
+  import Item from "../components/library/Item.svelte";
+  import Loader from "../components/widgets/Loader.svelte";
   import Search from "../components/search/Search.svelte"
   import { stores } from "@sapper/app";
   const { session } = stores();

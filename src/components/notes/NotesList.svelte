@@ -1,13 +1,13 @@
 <script>
-  import { notes, clearSelected, selectedItems } from "../../stores";
+  import { notes, clearSelected, clearSelectedNotes, selectedNotes } from "../../stores";
   import NotesCard from "./NotesCard.svelte";
-  import SortSelect from "../workspace/SortSelect.svelte";
+  import SortSelect from "../library/SortSelect.svelte";
   import NoNotes from "../img/NoNotes.svelte";
   import IcoFilter from "../img/IcoFilter.svelte";
-  import NotesSearch from "../NotesSearch.svelte";
-  import FilterNote from "../FilterNote.svelte";
-  import NotesListFooter from "./NotesListFooter.svelte";
-  import PaginationButtons from "../PaginationButtons.svelte";
+  import NotesSearch from "../widgets/NotesSearch.svelte";
+  import FilterNote from "../widgets/FilterNote.svelte";
+  import NotesListFooter from "./notesListFooter/NotesListFooter.svelte";
+  import PaginationButtons from "../widgets/PaginationButtons.svelte";
   import { stores } from "@sapper/app";
   const { page } = stores();
   let filterOn = false;
@@ -34,15 +34,15 @@
     $page.path === "/notes/all/all" || $page.path === "/notes/all/all/"
       ? true
       : false;
-  $: if (!selectable) clearSelected();
+  $: if (!selectable) clearSelectedNotes();
 
-  clearSelected();
+  clearSelectedNotes();
 
   let selectAll = false;
   let chooseAll = () => {
-    if ($selectedItems.size !== items.length) selectAll = true;
+    if ($selectedNotes.size !== items.length) selectAll = true;
   };
-  $: fullList = $selectedItems.size == items.length ? true : false;
+  $: fullList = $selectedNotes.size == items.length ? true : false;
 </script>
 
 <style>
@@ -50,10 +50,6 @@
     --list-template-columns: 60px 1fr 1fr 0.5fr 0.5fr 2rem;
     --item-font-size: 0.7rem;
     --list-grid-gap: calc(var(--base) * 0.5);
-  }
-  .Header > div {
-    display: flex;
-    align-items: center;
   }
   .Cards {
     position: relative;
@@ -238,14 +234,14 @@
     {/each}
   {/if}
 </div>
-{#if selecting && $selectedItems.size && selectable}
+{#if selecting && $selectedNotes.size && selectable}
   <NotesListFooter
     type="note"
     {chooseAll}
     {fullList}
     endSelection={() => {
       selecting = false;
-      clearSelected();
+      clearSelectedNotes();
     }} />
 {/if}
 {#if !$page.params.id && items && items.length}

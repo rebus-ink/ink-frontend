@@ -1,6 +1,6 @@
 <script>
   import CloseSidebar from "../../img/IcoCloseColumn.svelte";
-  import DefaultNotebookForm from "../../publication/reader/DefaultNotebookForm.svelte"
+  import DefaultNotebookForm from "./DefaultNotebookForm.svelte"
   export let hidden = false;
   export let chapterTitle = "";
   export let sidebar;

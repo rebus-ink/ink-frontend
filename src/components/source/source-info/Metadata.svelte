@@ -3,7 +3,7 @@
   import { refresh } from "../../../../state/refresh";
   import IcoEdit from "../../img/IcoEdit.svelte";
   import ArrowDropDown from "../../img/ArrowDropDown.svelte";
-  import MetadataLists from "../../publication/SourceInfo/MetadataLists.svelte";
+  import MetadataLists from "./MetadataLists.svelte";
   // export let form;
   export let save = false;
   /*

@@ -7,7 +7,7 @@
   } from "../source-margin/processNote.js";
   import { assignIco } from "../source-margin/assignIco.js";
   import { setColour } from "./setColour.js";
-  import DateFormat from "../../notes/Date.svelte";
+  import DateFormat from "../../widgets/Date.svelte";
   import HighlightMarginEdit from "./HighlightMarginEdit.svelte";
   import IcoNotebook from "../../img/IcoNotebook.svelte";
   import HighlightButton from "./HighlightButton.svelte";
@@ -15,8 +15,8 @@
   import { onDestroy, onMount } from "svelte";
   import { text } from "svelte/internal";
   export let note;
-  export let annotations;
-  export let element;
+  // export let annotations;
+  // export let element;
   // $: if (element && annotations) {
   //   element.addEventListener("annotation-id-change", () => {
   //     note = annotations[element.dataset.annotationId];

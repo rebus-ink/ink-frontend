@@ -19,7 +19,7 @@
     <div>
   
         {#if url}
-        <iframe src={url}></iframe>
+        <iframe src={url} title="your video"></iframe>
         {/if}
   
     </div>

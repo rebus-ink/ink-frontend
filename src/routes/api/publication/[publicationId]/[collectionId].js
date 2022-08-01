@@ -1,6 +1,5 @@
 import got from "got";
 
-// This needs to filter by workspace
 export async function put(req, res, next) {
   if (!req.user.profile) return res.sendStatus(401);
   const url = `${process.env.API_SERVER}sources/${req.params.publicationId}/`;

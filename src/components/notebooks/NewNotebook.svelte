@@ -4,8 +4,7 @@
 
   import Button from "../widgets/Button.svelte";
   import Closer from "../widgets/Closer.svelte";
-  import WhiteButton from "../workspace/WhiteButton.svelte";
-  import { send, receive } from "../../routes/_crossfade.js";
+  import WhiteButton from "../widgets/WhiteButton.svelte";
   import { tick } from "svelte";
   import { getToken } from "../../getToken";
   import { refreshNotebooks, refreshInNtbk } from "../../stores";

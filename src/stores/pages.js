@@ -14,7 +14,7 @@ export const pages = derived(
     if ($page.query.returnTo) return;
     set({ type: "loading", items: [] });
 
-    return fetch(`/api/pages?notebook=${$page.params.id}`)
+    return fetch(`/api/outlines?notebook=${$page.params.id}`)
       .then((lib) => {
         set(lib);
       })

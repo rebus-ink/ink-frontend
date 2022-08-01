@@ -71,29 +71,7 @@ export async function post(req, res, next) {
           });
         }
       }
-      // Check workspace, if there is one, add
-      if (req.body.addWorkspace && req.body.addWorkspace !== "all") {
-        await got
-          .put(`${response.id}tags/${req.body.addWorkspace}`, {
-            headers: {
-              "content-type": "application/ld+json",
-              Authorization: `Bearer ${req.user.token}`,
-            },
-          })
-          .json();
-      }
-      if (req.body.addedWorkspaces && req.body.addedWorkspaces !== "all") {
-        for (const workspace of req.body.addedWorkspaces) {
-          await got
-            .put(`${response.id}tags/${workspace.id}`, {
-              headers: {
-                "content-type": "application/ld+json",
-                Authorization: `Bearer ${req.user.token}`,
-              },
-            })
-            .json();
-        }
-      }
+
       if (req.body.addedCollections && req.body.addedCollections.length !== 0) {
         for (const coll of req.body.addedCollections) {
           await got
