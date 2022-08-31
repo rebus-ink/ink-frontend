@@ -160,6 +160,7 @@
   $: if (type !== "note") {
     menu = menu.filter((i) => i !=="Export")
   }
+
   $: if ($page.path.startsWith("/notebooks"))
     menu = menu.filter((i) => i !== "Edit");
 
@@ -173,6 +174,7 @@
 
   async function exportSelected() {
     const body = { items: Array.from($selectedNotes) };
+
     try {
       await fetch('/export/notes', {
         method: "POST",
@@ -186,11 +188,13 @@
       });
 
       let server
-      if ($page && $page.host === 'localhost:3000') {
-        server = 'http://localhost:3000'
+
+      if ($page && $page.host === 'app.rebus.ink' ) {
+        server = "https://ink-api-dev-dot-thematic-cider-139815.appspot.com/" 
       } else {
-        server = `https://${$page.host}` 
+        server = 'https://ink-server-dev-dot-thematic-cider-139815.appspot.com' 
       }
+      server = 'http://localhost:3000'
 
       const url = `${server}/export/notes`;
       window.location.replace(url);
@@ -454,5 +458,6 @@
     {/if}
   </form>
 {:else}
-  <DeletionModal {remove} bind:activeModal {type} plural={true} items={type === "note" ? notesListed : sourcesListed} />
+
+  <DeletionModal {remove} bind:activeModal {type} plural={true} items={notesListed} />
 {/if}

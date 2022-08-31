@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 June 28, 2022
 - Fix missing satic images when deployed
 
+=======
+>>>>>>> ca49484 (import export and onboarding)
 June 23, 2022
 - finalize import / export and onboarding
 

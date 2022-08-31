@@ -12,8 +12,11 @@
     import CloseIcon from "../../source/source-highlight/CloseIcon.svelte"
     import Closer from "../../widgets/Closer.svelte";
     import WhiteButton from "../../widgets/WhiteButton.svelte";
+<<<<<<< HEAD
     import TabsSection from "../../addItems/TabsSection.svelte"
     import FileInput from "../../addItems/FileInput.svelte"
+=======
+>>>>>>> fd32486 (cleaning up components)
     import { send, receive } from "../../../routes/_crossfade.js";
     import { tick } from "svelte";
     import NoteEditor from "../../widgets/NoteEditor.svelte";

@@ -7,8 +7,8 @@ const {
     Packer
   } = require('docx');
   const { htmlToDocxObject } = require('html-to-docx');
-
   let docxExport;
+
 
   const extractChildren = (children, fontSize) => {
     return children.map(child => {
@@ -42,9 +42,11 @@ const {
 
     list.items.forEach(note => {
       // save source
-      if (note.source) sources.push(note.source)
+      if (note.source){
+       sources.push(note.source)
+      }
 
-        note.body.forEach(body => {
+       note.body.forEach(body => {
 
           if (body.motivation === 'highlighting') {
               body.content = `HIGHLIGHT: ${body.content}`
@@ -81,6 +83,7 @@ const {
               children.push(new Paragraph({text: ''}))
               children.push(new Paragraph({text: ''}))
 
+              
             } else {
               children.push(
                 new Paragraph({
@@ -88,8 +91,6 @@ const {
                 })
               )
               children.push(new Paragraph({text: ''}))
-              children.push(new Paragraph({text: ''}))
-
             }
           })
   
@@ -108,7 +109,7 @@ const {
               )
             }
           }
-        })
+       
         if (note.json && note.json.pages) {
           children.push(new Paragraph({ text: `Page number: ${note.json.pages}` }))
         }
@@ -118,11 +119,12 @@ const {
             text: '*****'
           })
         )
-      
     })
+  })
   
     if (sources.length) {
       sources = sources.map(source => source.name)
+
       sources = [... new Set(sources)]
 
       children.push(
@@ -152,13 +154,13 @@ const {
       ]
     })
 
-    sources = [];
-    children = [];
+
     return notesDoc
   }
 
 
   export async function post(req, res, next) {
+
     docxExport = listToDocx(req.body)
 
     res.send()

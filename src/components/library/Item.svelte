@@ -36,6 +36,7 @@
       if (tag.type === "stack") return tag;
     });
   }
+  $: console.log(stacks)
 </script>
 
 <style>
