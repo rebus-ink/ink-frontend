@@ -24,6 +24,11 @@ For more details, see the [Overview Guide](./docs/overview.md).
 ## Development
 
 See the front-end service [Development Guide](./docs/development.md) for instructions on setup and testing.
+
+## Unfinished / Broken Features
+
+See this document: [Unfinished](./docs/unfinished.md)
+
 ## Contributing
 
 This project is still in the very early stages and is not yet ready for unsolicited contributions.
